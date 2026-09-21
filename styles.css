@@ -2,4 +2,9 @@ html, body{
     margin: 0;
     padding: 0;
 }
-    
+.hero-section {
+    background-image: url("imgs/fondo_juegos.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+}
