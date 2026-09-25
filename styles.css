@@ -8,3 +8,47 @@ html, body{
     background-position: center;
     height: 90vh;
 }
+
+/*login*/
+
+.login-page {
+  background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
+              url("imgs/fondo_login.jpg") center/cover no-repeat;
+  position: relative;
+}
+
+.login-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  z-index: 0;
+}
+
+/*login y signup card*/
+
+.login-card {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  width: 100%;
+  border-width: 1px;
+  border-radius: 1rem;
+}
+
+/*signup*/
+
+
+.signup-page {
+  background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
+              url("imgs/fondo_login.jpg") center/cover no-repeat;
+  position: relative;
+}
+
+.signup-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  z-index: 0;
+}
