@@ -1,49 +1,135 @@
 <!doctype html>
 <html lang="es" data-bs-theme="dark">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Iniciar sesión · RoyalSpin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body class="login-page d-flex align-items-center justify-content-center min-vh-100">
-    
-    <a href="index.html" class="btn btn-outline-light btn-sm position-absolute top-0 start-0 m-3 m-sm-4">
-        ← Volver al inicio
-    </a>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Iniciar sesión · RoyalSpin</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body class="login-page">
 
-    <div class="login-card card bg-dark text-white p-4 p-sm-5 border-warning">
-      <div class="text-center mb-4">
-        <img src="/imgs/logo.png" alt="Logo" width="40" height="32" class="mb-2">
-        <h1 class="h4 fw-bold mb-0">ROYALSPIN</h1>
-      </div>
+        <a href="index.html" class="btn btn-outline-light btn-sm position-absolute top-0 start-0 m-3 m-sm-4">
+            ← Volver al inicio
+        </a>
 
-      <h2 class="h3 fw-bold text-center mb-4">Iniciar sesión</h2>
+        <main class="container min-vh-100 d-flex align-items-center py-5">
+            <div class="row justify-content-center w-100">
+                <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
 
-      <form>
-        <div class="mb-3">
-          <label for="email" class="form-label text-uppercase small">Correo electrónico</label>
-          <input type="email" class="form-control form-control-lg" id="email" placeholder="ejemplo@correo.com" required>
-        </div>
+                    <div class="login-card card bg-dark text-white p-4 p-sm-5 border-warning">
+                        <div class="text-center mb-4">
+                            <img src="imgs/logo.png" alt="Logo" width="40" height="32" class="mb-2">
+                            <h1 class="h4 fw-bold mb-0">ROYALSPIN</h1>
+                        </div>
 
-        <div class="mb-2">
-          <label for="password" class="form-label text-uppercase small">Contraseña</label>
-          <input type="password" class="form-control form-control-lg" id="password" placeholder="••••••••••" required>
-        </div>
+                        <h2 class="h3 fw-bold text-center mb-4">Iniciar sesión</h2>
 
-        <div class="text-end mb-4">
-          <a href="#" class="link-warning small text-decoration-none">¿Olvidaste tu contraseña?</a>
-        </div>
+                        <form id="formLogin" class="row g-3" novalidate>
+                            <div class="col-12">
+                                <label for="email" class="form-label text-uppercase small">Correo electrónico</label>
+                                <input type="email" class="form-control form-control-lg" id="email" placeholder="ejemplo@correo.com">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-        <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold">Entrar</button>
+                            <div class="col-12">
+                                <label for="password" class="form-label text-uppercase small">Contraseña</label>
+                                <input type="password" class="form-control form-control-lg" id="password" placeholder="••••••••••">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-        <p class="text-center small text-body-secondary mt-4 mb-0">
-          ¿No tienes cuenta?
-          <a href="signup.html" class="link-warning fw-bold text-decoration-none">Regístrate</a>
-        </p>
-      </form>
-    </div>
+                            <div class="col-12 text-end">
+                                <a href="#" class="link-warning small text-decoration-none">¿Olvidaste tu contraseña?</a>
+                            </div>
 
-  </body>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold">Entrar</button>
+                            </div>
+
+                            <div class="col-12">
+                                <p class="text-center small text-body-secondary mb-0">
+                                    ¿No tienes cuenta?
+                                    <a href="signup.html" class="link-warning fw-bold text-decoration-none">Regístrate</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+        <script>
+            const form = document.getElementById("formLogin");
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+            const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+            function error(input, mensaje) {
+                input.classList.add("is-invalid");
+                input.dataset.mensaje = mensaje;
+                input.parentElement.querySelector(".invalid-feedback").textContent = mensaje;
+                return false;
+            }
+
+            function limpiar(input) {
+                input.classList.remove("is-invalid");
+                delete input.dataset.mensaje;
+                input.removeAttribute("title");
+                input.style.cursor = "";
+                input.parentElement.querySelector(".invalid-feedback").textContent = "";
+            }
+
+            // Leyenda del error al pasar el ratón por el icono "!" (zona derecha del input)
+            function activarLeyenda(input) {
+                input.addEventListener("mousemove", (e) => {
+                    const enIcono = e.clientX > input.getBoundingClientRect().right - 48;
+                    if (input.classList.contains("is-invalid") && enIcono) {
+                        input.title = input.dataset.mensaje;
+                        input.style.cursor = "help";
+                    } else {
+                        input.removeAttribute("title");
+                        input.style.cursor = "";
+                    }
+                });
+                input.addEventListener("mouseleave", () => {
+                    input.removeAttribute("title");
+                    input.style.cursor = "";
+                });
+            }
+
+            function validarEmail() {
+                const v = email.value.trim();
+                if (!v) return error(email, "El correo electrónico es obligatorio.");
+                if (!EMAIL_RE.test(v)) return error(email, "El correo no tiene un formato válido.");
+                return true;
+            }
+
+            function validarPassword() {
+                if (!password.value) return error(password, "La contraseña es obligatoria.");
+                if (password.value.length < 6) return error(password, "Debe tener al menos 6 caracteres.");
+                return true;
+            }
+
+            email.addEventListener("input", () => limpiar(email));
+            password.addEventListener("input", () => limpiar(password));
+
+            activarLeyenda(email);
+            activarLeyenda(password);
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const emailOk = validarEmail();
+                const passOk = validarPassword();
+
+                if (!emailOk || !passOk) {
+                    form.querySelector(".is-invalid").focus();
+                    return;
+                }
+
+                // Login correcto (simulado, sin backend): ir a la pantalla home
+                window.location.href = "home.html";
+            });
+        </script>
+    </body>
 </html>

@@ -1,62 +1,259 @@
 <!doctype html>
 <html lang="es" data-bs-theme="dark">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear cuenta · RoyalSpin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body class="signup-page d-flex align-items-center justify-content-center min-vh-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Crear cuenta · RoyalSpin</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body class="signup-page position-relative">
 
-    <a href="index.html" class="btn btn-outline-light btn-sm position-absolute top-0 start-0 m-3 m-sm-4">
-      ← Volver al inicio
-    </a>
+        <a href="index.html" class="btn btn-outline-light btn-sm position-absolute top-0 start-0 m-3 m-sm-4">
+            ← Volver al inicio
+        </a>
 
-    <div class="login-card card bg-dark text-white p-4 p-sm-5 border-warning my-5">
-      <div class="text-center mb-4">
-        <img src="/imgs/logo.png" alt="Logo" width="40" height="32" class="mb-2">
-        <h1 class="h4 fw-bold mb-0">ROYALSPIN</h1>
-      </div>
+        <main class="container min-vh-100 d-flex align-items-center py-5">
+            <div class="row justify-content-center w-100">
+                <div class="col-12 col-md-10 col-lg-8 col-xl-6">
 
-      <h2 class="h3 fw-bold text-center mb-4">Crear cuenta</h2>
+                    <div class="card bg-dark text-white border-warning rounded-4 position-relative p-4 p-sm-5">
+                        <div class="text-center mb-4">
+                            <img src="imgs/logo.png" alt="Logo" width="40" height="32" class="mb-2">
+                            <h1 class="h4 fw-bold mb-0">ROYALSPIN</h1>
+                        </div>
 
-      <form>
-        <div class="mb-3">
-          <label for="usuario" class="form-label text-uppercase small">Nombre de usuario</label>
-          <input type="text" class="form-control form-control-lg" id="usuario" placeholder="TuNombre" required>
-        </div>
+                        <h2 class="h3 fw-bold text-center mb-4">Crear cuenta</h2>
 
-        <div class="mb-3">
-          <label for="email" class="form-label text-uppercase small">Correo electrónico</label>
-          <input type="email" class="form-control form-control-lg" id="email" placeholder="ejemplo@correo.com" required>
-        </div>
+                        <form id="formSignup" class="row g-3" novalidate>
+                            <div class="col">
+                                <label for="nombres" class="form-label text-uppercase small">Nombre/s</label>
+                                <input type="text" class="form-control form-control-lg" id="nombres" placeholder="Tu/s Nombre/s">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-        <div class="mb-3">
-          <label for="nacimiento" class="form-label text-uppercase small">Fecha de nacimiento</label>
-          <input type="date" class="form-control form-control-lg" id="nacimiento" required>
-        </div>
+                            <div class="col-12 col-md-12">
+                                <label for="apellidos" class="form-label text-uppercase small">Apellido/s</label>
+                                <input type="text" class="form-control form-control-lg" id="apellidos" placeholder="Tu/s Apellido/s">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-        <div class="mb-3">
-          <label for="password" class="form-label text-uppercase small">Contraseña</label>
-          <input type="password" class="form-control form-control-lg" id="password" placeholder="••••••••••" minlength="6" required>
-        </div>
+                            <div class="col-12 col-md-6">
+                                <label for="nacimiento" class="form-label text-uppercase small">Fecha de nacimiento</label>
+                                <input type="text" class="form-control form-control-lg" id="nacimiento" placeholder="dd/mm/aaaa" inputmode="numeric" maxlength="10" autocomplete="off">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-        <div class="form-check mb-4">
-          <input class="form-check-input" type="checkbox" id="terminos" required>
-          <label class="form-check-label small text-body-secondary" for="terminos">
-            Acepto los términos y condiciones
-          </label>
-        </div>
+                            <div class="col-12 col-md-6">
+                                <label for="usuario" class="form-label text-uppercase small">Nombre de usuario</label>
+                                <input type="text" class="form-control form-control-lg" id="usuario" placeholder="Tu nombre de usuario">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-        <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold">Crear cuenta</button>
+                            <div class="col-12 col-md-12">
+                                <label for="email" class="form-label text-uppercase small">Correo electrónico</label>
+                                <input type="email" class="form-control form-control-lg" id="email" placeholder="ejemplo@correo.com">
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            
+                            
 
-        <p class="text-center small text-body-secondary mt-4 mb-0">
-          ¿Ya tienes cuenta?
-          <a href="login.html" class="link-warning fw-bold text-decoration-none">Inicia sesión</a>
-        </p>
-      </form>
-    </div>
+                            <div class="col-12 col-md-6">
+                                <label for="password" class="form-label text-uppercase small">Contraseña</label>
+                                <input type="password" class="form-control form-control-lg" id="password" placeholder="••••••••••">
+                                <div class="invalid-feedback"></div>
+                            </div>
 
-  </body>
+                            <div class="col-12 col-md-6">
+                                <label for="confirmar" class="form-label text-uppercase small">Confirmar contraseña</label>
+                                <input type="password" class="form-control form-control-lg" id="confirmar" placeholder="••••••••••">
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terminos">
+                                    <label class="form-check-label small text-body-secondary" for="terminos">
+                                        Acepto los términos y condiciones
+                                    </label>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold">Crear cuenta</button>
+                            </div>
+
+                            <div class="col-12">
+                                <p class="text-center small text-body-secondary mb-0">
+                                    ¿Ya tienes cuenta?
+                                    <a href="login.html" class="link-warning fw-bold text-decoration-none">Inicia sesión</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+        <script>
+            const form = document.getElementById("formSignup");
+            const nombres = document.getElementById("nombres");
+            const apellidos = document.getElementById("apellidos");
+            const usuario = document.getElementById("usuario");
+            const email = document.getElementById("email");
+            const nacimiento = document.getElementById("nacimiento");
+            const password = document.getElementById("password");
+            const confirmar = document.getElementById("confirmar");
+            const terminos = document.getElementById("terminos");
+            const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+            const NOMBRE_RE = /^\p{L}[\p{L}'’ -]*$/u;
+
+            function error(input, mensaje) {
+                input.classList.add("is-invalid");
+                input.dataset.mensaje = mensaje;
+                input.parentElement.querySelector(".invalid-feedback").textContent = mensaje;
+                return false;
+            }
+
+            function limpiar(input) {
+                input.classList.remove("is-invalid");
+                delete input.dataset.mensaje;
+                input.removeAttribute("title");
+                input.style.cursor = "";
+                input.parentElement.querySelector(".invalid-feedback").textContent = "";
+            }
+
+            // Leyenda del error al pasar el ratón por el icono "!" (zona derecha del input)
+            function activarLeyenda(input) {
+                input.addEventListener("mousemove", (e) => {
+                    const enIcono = e.clientX > input.getBoundingClientRect().right - 48;
+                    if (input.classList.contains("is-invalid") && enIcono) {
+                        input.title = input.dataset.mensaje;
+                        input.style.cursor = "help";
+                    } else {
+                        input.removeAttribute("title");
+                        input.style.cursor = "";
+                    }
+                });
+                input.addEventListener("mouseleave", () => {
+                    input.removeAttribute("title");
+                    input.style.cursor = "";
+                });
+            }
+
+            // Máscara dd/mm/aaaa: inserta las barras mientras se escribe
+            nacimiento.addEventListener("input", () => {
+                let d = nacimiento.value.replace(/\D/g, "").slice(0, 8);
+                if (d.length > 4) d = d.slice(0, 2) + "/" + d.slice(2, 4) + "/" + d.slice(4);
+                else if (d.length > 2) d = d.slice(0, 2) + "/" + d.slice(2);
+                nacimiento.value = d;
+            });
+
+            function validarNombres() {
+                const v = nombres.value.trim();
+                if (!v) return error(nombres, "El nombre es obligatorio.");
+                if (!NOMBRE_RE.test(v)) return error(nombres, "El nombre solo puede contener letras, espacios y apóstrofes.");
+                return true;
+            }
+
+            function validarApellidos() {
+                const v = apellidos.value.trim();
+                if (!v) return error(apellidos, "El apellido es obligatorio.");
+                if (!NOMBRE_RE.test(v)) return error(apellidos, "El apellido solo puede contener letras, espacios y apóstrofes.");
+                return true;
+            }
+
+            function validarUsuario() {
+                const v = usuario.value.trim();
+                if (!v) return error(usuario, "El nombre de usuario es obligatorio.");
+                if (v.length < 3) return error(usuario, "Debe tener al menos 3 caracteres.");
+                if (!NOMBRE_RE.test(v)) return error(usuario, "El nombre de usuario solo puede contener letras, números y espacios.");
+                return true;
+            }
+
+            function validarEmail() {
+                const v = email.value.trim();
+                if (!v) return error(email, "El correo electrónico es obligatorio.");
+                if (!EMAIL_RE.test(v)) return error(email, "El correo no tiene un formato válido.");
+                return true;
+            }
+
+            function validarFecha() {
+                const v = nacimiento.value.trim();
+                if (!v) return error(nacimiento, "La fecha de nacimiento es obligatoria.");
+
+                const m = v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+                if (!m) return error(nacimiento, "Usa el formato dd/mm/aaaa.");
+
+                const dia = +m[1], mes = +m[2], anio = +m[3];
+                const fecha = new Date(anio, mes - 1, dia);
+                const existe = fecha.getFullYear() === anio && fecha.getMonth() === mes - 1 && fecha.getDate() === dia;
+                if (!existe || anio < 1900) return error(nacimiento, "Esa fecha no es válida.");
+
+                const hoy = new Date();
+                if (fecha > hoy) return error(nacimiento, "La fecha no puede ser futura.");
+
+                let edad = hoy.getFullYear() - anio;
+                if (hoy < new Date(hoy.getFullYear(), mes - 1, dia)) edad--;
+                if (edad < 18) return error(nacimiento, "Debes ser mayor de 18 años.");
+                return true;
+            }
+
+            function validarPassword() {
+                if (!password.value) return error(password, "La contraseña es obligatoria.");
+                if (password.value.length < 6) return error(password, "Debe tener al menos 6 caracteres.");
+                return true;
+            }
+
+            function validarConfirmar() {
+                if (!confirmar.value) return error(confirmar, "Confirma tu contraseña.");
+                if (confirmar.value !== password.value) return error(confirmar, "Las contraseñas no coinciden.");
+                return true;
+            }
+
+            function validarTerminos() {
+                if (!terminos.checked) return error(terminos, "Debes aceptar los términos y condiciones.");
+                return true;
+            }
+
+            [nombres, apellidos, usuario, email, nacimiento, confirmar].forEach((campo) => {
+                campo.addEventListener("input", () => limpiar(campo));
+            });
+
+            password.addEventListener("input", () => {
+                limpiar(password);
+                if (confirmar.classList.contains("is-invalid")) limpiar(confirmar);
+            });
+
+            terminos.addEventListener("change", () => limpiar(terminos));
+
+            [nombres, apellidos, usuario, email, nacimiento, password, confirmar].forEach(activarLeyenda);
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                // Se ejecutan todas (sin cortar en la primera) para marcar todos los errores a la vez
+                const resultados = [
+                    validarNombres(),
+                    validarApellidos(),
+                    validarUsuario(),
+                    validarEmail(),
+                    validarFecha(),
+                    validarPassword(),
+                    validarConfirmar(),
+                    validarTerminos()
+                ];
+
+                if (resultados.includes(false)) {
+                    form.querySelector(".is-invalid").focus();
+                    return;
+                }
+
+                // Registro correcto (simulado, sin backend): ir al login
+                window.location.href = "login.html";
+            });
+        </script>
+    </body>
 </html>
