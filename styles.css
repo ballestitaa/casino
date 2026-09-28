@@ -46,3 +46,11 @@
     background-color: #ffcd39 !important; 
     color: #000 !important;
   }
+
+  /* TABLA LEADERBOARD */
+.table-transparente {
+  --bs-table-bg: transparent;
+  --bs-table-color: #fff;
+  background-color: rgba(0, 0, 0, 0.4); /* Fondo general translúcido (aquí ajustas la opacidad del negro) */
+  color: #fff;
+}
