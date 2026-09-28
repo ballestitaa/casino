@@ -27,3 +27,22 @@
 }
 
 
+/* clases para animaciones de los juegos en el home */
+  .hover-animado {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+
+  .hover-animado:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 12px 25px rgba(255, 193, 7, 0.4) !important; 
+  }
+
+  .btn-glow {
+    transition: box-shadow 0.3s ease, background-color 0.3s ease !important;
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 12px rgba(255, 193, 7, 0.8), 0 0 25px rgba(255, 193, 7, 0.5) !important;
+    background-color: #ffcd39 !important; 
+    color: #000 !important;
+  }
