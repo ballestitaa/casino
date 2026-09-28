@@ -79,7 +79,7 @@
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #ffc107;
 }
-=======
+
   /* TABLA LEADERBOARD */
 .table-transparente {
   --bs-table-bg: transparent;
@@ -87,4 +87,4 @@
   background-color: rgba(0, 0, 0, 0.4); /* Fondo general translúcido (aquí ajustas la opacidad del negro) */
   color: #fff;
 }
->>>>>>> 47c4ddd17d14e8a85f9541ff3bd987779a3ea6b3
+
