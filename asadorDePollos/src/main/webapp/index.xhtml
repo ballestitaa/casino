@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:p="primefaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const toastEl = document.getElementById('miToast');
+                const toast = new bootstrap.Toast(toastEl);
+                toast.show();
+            });
+        </script>
+
+    <!-- HERO (Mateo) -->
+    <header class="hero-section d-flex align-items-center text-center text-white">
+      <div class="container py-5">
+        <!-- <span class="badge bg-primary text-light mb-3">Proyecto académico · Desarrollo de Interfaces</span> -->
+        <h1 class="display-4 fw-bold">¡BIENVENIDO AL MEJOR CASINO ONLINE!</h1>
+        <p class="lead text-body-secondary">Juega y gana premios increíbles con nuestros juegos exclusivos.</p>
+        <div class="d-flex justify-content-center gap-3 my-4">
+          <a href="login.html" class="btn btn-primary btn-lg fw-bold">Iniciar Sesion</a>
+          <a href="signup.html" class="btn btn-outline-primary btn-lg fw-bold">Registrarse</a>
+          <a href="home.html" class="btn btn-outline-light btn-lg fw-bold">Ir a menú - dev</a>
+        </div>
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-4 mt-4">
+          <span>🎰 +1000 Juegos</span>
+          <span>🎁 Bonos diarios</span>
+          <span>🎧 Soporte 24/7</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="toast-container position-static">
+      <div id="miToast" class="toast" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="imgs/logo.png" class="rounded me-2" style="width: 25px;" alt="..."></img>
+          <strong class="me-auto"><b>ROYALSPIN</b></strong>
+          <small class="text-body-secondary">justo ahora</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          <br></br>
+
+        </div>
+        <div class="toast-body">
+          <img src="imgs/ruleta.gif" height="200px" width="100%" alt=""></img>
+          <h5 class="mt-2">10€ de bonus en tu primer depósito</h5>
+          <span>Utiliza el código <b>10RULETA</b> al registrarte</span>
+        </div>
+      </div>
+    </div>
+
+    </ui:define>
+</ui:composition>

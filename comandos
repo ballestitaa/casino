@@ -1,0 +1,2 @@
+mvn clean install -Pdeploy-local                 cambios java
+mvn process-resource -Pdeploy-web
