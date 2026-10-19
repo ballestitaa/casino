@@ -1,5 +1,4 @@
 .hero-section {
-    background-image: url("imgs/fondo_juegos.jpg");
     background-size: cover;
     background-position: center;
     min-height: 90vh;
@@ -8,12 +7,12 @@
 /* login y signup: fondo con imagen */
 .login-page {
     background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
-                url("imgs/fondo_login.jpg") center/cover no-repeat;
+                url("../imgs/fondo_login.jpg") center/cover no-repeat;
 }
 
 .signup-page {
     background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
-                url("imgs/fondo_login.jpg") center/cover no-repeat;
+                url("../imgs/fondo_login.jpg") center/cover no-repeat;
 }
 
 /* login y signup: blur del fondo */
@@ -94,7 +93,7 @@
   padding-bottom: 40px;
   padding-left: 50px;
   padding-right: 50px;
-  background-image: url("imgs/fondo_juegos.jpg");
+  background-image: url("/casino/resources/imgs/fondo_juegos.jpg");
   background-size: cover;
   background-position: center;
   min-height: 70vh;
@@ -173,7 +172,7 @@
 
 .game-area {
   height: 360px;
-  background-image: url("imgs/imagen_BlackJack.jpg"); /* Ruta de tu imagen */
+  background-image: url("../imgs/imagen_BlackJack.jpg"); /* Ruta de tu imagen */
   background-size: cover; /* Hace que la imagen cubra todo el recuadro sin deformarse */
   background-repeat: no-repeat;
   background-position: center; /* Centra la imagen en el contenedor */
@@ -191,15 +190,15 @@
 /* Imagen de cada juego (el Blackjack usa la de .game-area) */
 
 .game-ruleta {
-  background-image: url("imgs/imagen_Ruleta.jpg");
+  background-image: url("../imgs/imagen_Ruleta.jpg");
 }
 
 .game-poker {
-  background-image: url("imgs/imagen_Poker.jpg");
+  background-image: url("../imgs/imagen_Poker.jpg");
 }
 
 .game-pirots {
-  background-image: url("imgs/imagen_Pirots.jpg");
+  background-image: url("../imgs/imagen_Pirots.jpg");
 }
 
 /* Información inferior */
