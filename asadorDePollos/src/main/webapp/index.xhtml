@@ -2,7 +2,7 @@
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
                 xmlns:p="primefaces"
-                template="/WEB-INF/templates/template.xhtml">
+                template="/WEB-INF/templates/templateNoSesion.xhtml">
 
     <ui:define name="content">
 
@@ -24,9 +24,9 @@
         <h1 class="display-4 fw-bold">¡BIENVENIDO AL MEJOR CASINO ONLINE!</h1>
         <p class="lead text-body-secondary">Juega y gana premios increíbles con nuestros juegos exclusivos.</p>
         <div class="d-flex justify-content-center gap-3 my-4">
-          <a href="login.html" class="btn btn-primary btn-lg fw-bold">Iniciar Sesion</a>
-          <a href="signup.html" class="btn btn-outline-primary btn-lg fw-bold">Registrarse</a>
-          <a href="home.html" class="btn btn-outline-light btn-lg fw-bold">Ir a menú - dev</a>
+          <a href="#{request.contextPath}/sesion/login.xhtml" class="btn btn-primary btn-lg fw-bold">Iniciar Sesion</a>
+          <a href="signup.xhtml" class="btn btn-outline-primary btn-lg fw-bold">Registrarse</a>
+          <a href="home.xhtml" class="btn btn-outline-light btn-lg fw-bold">Ir a menú - dev</a>
         </div>
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-4 mt-4">
           <span>🎰 +1000 Juegos</span>

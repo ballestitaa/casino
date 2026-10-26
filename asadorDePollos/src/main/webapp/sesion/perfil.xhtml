@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:p="primefaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="title">Mi Perfil</ui:define>
+
+    <ui:define name="head">
+        <style>
+            body {
+                background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("#{request.contextPath}/resources/imgs/fondoPerfil.jpg");
+                background-size: cover;
+                background-attachment: fixed;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="container d-flex flex-column justify-content-center align-items-center flex-grow-1 p-5">
+            <div class="row w-100 align-items-center">
+                <!-- Foto, nombre y saldo -->
+                <div class="col-md-3 d-flex flex-column justify-content-center flex-grow-1">
+                    <div>
+                        <img class="rounded-circle mb-3" src="https://i.pravatar.cc/300" alt="Foto de perfil" width="150" height="150" />
+                        <h1 class="mt-2">Nombre</h1>
+                        <h2>Saldo Actual: <span class="text-warning">100$</span></h2>
+                    </div>
+                </div>
+
+                <!-- Historial reciente -->
+                <div class="col-md-3">
+                    <h3 class="mb-3">Historial reciente</h3>
+                    <table class="table table-dark table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Última Ganancia</th>
+                            <th scope="col">Juego</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                        <tr>
+                            <th scope="row" class="text-success">+150$</th>
+                            <td>Ruleta</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-danger">-30$</th>
+                            <td>Blackjack</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-success">+500$</th>
+                            <td>Tragaperras</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-success">+75$</th>
+                            <td>Póker</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mejores Wins -->
+                <div class="col-md-3">
+                    <h3 class="mb-3">Mejores Wins</h3>
+                    <table class="table table-dark table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Premio</th>
+                            <th scope="col">Juego</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                        <tr>
+                            <th scope="row" class="text-success">+2,500$</th>
+                            <td>Gates of Olympus</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-success">+1,200$</th>
+                            <td>Sweet Bonanza</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-success">+850$</th>
+                            <td>Ruleta en Vivo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-success">+500$</th>
+                            <td>Blackjack</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

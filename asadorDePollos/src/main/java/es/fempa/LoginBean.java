@@ -3,23 +3,25 @@ package es.fempa;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
-
+// poner comprobaciones en el post-construct
 @Named
 @ViewScoped
 public class LoginBean implements Serializable {
+    //@Inject UserBean userBean;
 
-    private String username;
+    private String usuario;
     private String password;
     private String mensaje;
 
-    public String getUsername() {
-        return username;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getPassword() {
@@ -39,13 +41,13 @@ public class LoginBean implements Serializable {
     }
 
     public void login() {
-        if(username.isEmpty() || password.isEmpty()) {
+        if(usuario.isEmpty() || password.isEmpty()) {
             mensaje = "El usuario y la contraseña son obligatorios";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "El usuario y la contraseña son obligatorios", null));
             return;
         }
 
-        if(username.equals("user") && password.equals("pass")) {
+        if(usuario.equals("user") && password.equals("pass")) {
             mensaje = "Login exitoso";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Login exitoso", null));
         } else {

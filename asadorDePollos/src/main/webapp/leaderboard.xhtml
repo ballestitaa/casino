@@ -1,0 +1,175 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:p="primefaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+  <ui:define name="title">Leaderboard</ui:define>
+
+  <ui:define name="head">
+    <style>
+      body {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("#{request.contextPath}/resources/imgs/fondoPerfil.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+      }
+    </style>
+  </ui:define>
+
+  <ui:define name="content">
+    <div class="container p-5">
+      <h1 class="mb-4 text-center">LEADERBOARD</h1>
+
+      <div class="table-responsive">
+        <table class="table table-striped align-middle table-transparente">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Jugador</th>
+            <th scope="col">Juego estrella</th>
+            <th scope="col" class="text-end">Ganancias totales</th>
+          </tr>
+          </thead>
+          <tbody class="table-group-divider">
+          <tr>
+            <th scope="row">1</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=1" alt="Foto de Carlos M." width="40" height="40" class="rounded-circle me-2" />
+              Carlos M.
+            </td>
+            <td><span class="badge text-bg-warning">Tragaperras</span></td>
+            <td class="text-end text-warning fw-bold">48,250$</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=5" alt="Foto de Laura G." width="40" height="40" class="rounded-circle me-2" />
+              Laura G.
+            </td>
+            <td><span class="badge text-bg-primary">Póker</span></td>
+            <td class="text-end text-warning fw-bold">41,900$</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=8" alt="Foto de Javier R." width="40" height="40" class="rounded-circle me-2" />
+              Javier R.
+            </td>
+            <td><span class="badge text-bg-danger">Ruleta</span></td>
+            <td class="text-end text-warning fw-bold">37,420$</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=9" alt="Foto de Marta S." width="40" height="40" class="rounded-circle me-2" />
+              Marta S.
+            </td>
+            <td><span class="badge text-bg-success">Blackjack</span></td>
+            <td class="text-end">33,780$</td>
+          </tr>
+          <tr>
+            <th scope="row">5</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=12" alt="Foto de Pablo T." width="40" height="40" class="rounded-circle me-2" />
+              Pablo T.
+            </td>
+            <td><span class="badge text-bg-warning">Tragaperras</span></td>
+            <td class="text-end">29,150$</td>
+          </tr>
+          <tr>
+            <th scope="row">6</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=16" alt="Foto de Elena V." width="40" height="40" class="rounded-circle me-2" />
+              Elena V.
+            </td>
+            <td><span class="badge text-bg-danger">Ruleta</span></td>
+            <td class="text-end">25,600$</td>
+          </tr>
+          <tr>
+            <th scope="row">7</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=13" alt="Foto de Andrés L." width="40" height="40" class="rounded-circle me-2" />
+              Andrés L.
+            </td>
+            <td><span class="badge text-bg-primary">Póker</span></td>
+            <td class="text-end">22,340$</td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=20" alt="Foto de Sofía P." width="40" height="40" class="rounded-circle me-2" />
+              Sofía P.
+            </td>
+            <td><span class="badge text-bg-success">Blackjack</span></td>
+            <td class="text-end">19,875$</td>
+          </tr>
+          <tr>
+            <th scope="row">9</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=14" alt="Foto de Diego F." width="40" height="40" class="rounded-circle me-2" />
+              Diego F.
+            </td>
+            <td><span class="badge text-bg-warning">Tragaperras</span></td>
+            <td class="text-end">17,200$</td>
+          </tr>
+          <tr>
+            <th scope="row">10</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=23" alt="Foto de Lucía B." width="40" height="40" class="rounded-circle me-2" />
+              Lucía B.
+            </td>
+            <td><span class="badge text-bg-danger">Ruleta</span></td>
+            <td class="text-end">14,930$</td>
+          </tr>
+          <tr>
+            <th scope="row">11</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=15" alt="Foto de Hugo N." width="40" height="40" class="rounded-circle me-2" />
+              Hugo N.
+            </td>
+            <td><span class="badge text-bg-primary">Póker</span></td>
+            <td class="text-end">12,480$</td>
+          </tr>
+          <tr>
+            <th scope="row">12</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=25" alt="Foto de Irene C." width="40" height="40" class="rounded-circle me-2" />
+              Irene C.
+            </td>
+            <td><span class="badge text-bg-success">Blackjack</span></td>
+            <td class="text-end">9,760$</td>
+          </tr>
+          <tr>
+            <th scope="row">13</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=33" alt="Foto de Raúl D." width="40" height="40" class="rounded-circle me-2" />
+              Raúl D.
+            </td>
+            <td><span class="badge text-bg-warning">Tragaperras</span></td>
+            <td class="text-end">7,315$</td>
+          </tr>
+          <tr>
+            <th scope="row">14</th>
+            <td>
+              <img src="https://i.pravatar.cc/40?img=44" alt="Foto de Nuria A." width="40" height="40" class="rounded-circle me-2" />
+              Nuria A.
+            </td>
+            <td><span class="badge text-bg-danger">Ruleta</span></td>
+            <td class="text-end">5,090$</td>
+          </tr>
+          <tr>
+            <th scope="row">15</th>
+            <td>
+              <img src="#{request.contextPath}/resources/imgs/josep.jpg" alt="Foto de Josep Caiza" width="40" height="40" class="rounded-circle me-2" />
+              Josep Caiza
+            </td>
+            <td><span class="badge text-bg-success">Blackjack</span></td>
+            <td class="text-end">2,640$</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ui:define>
+
+</ui:composition>
