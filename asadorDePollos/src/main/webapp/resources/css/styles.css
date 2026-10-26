@@ -7,12 +7,12 @@
 /* login y signup: fondo con imagen */
 .login-page {
     background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
-                url("../imgs/fondo_login.jpg") center/cover no-repeat;
+    url("#{resource['imgs:fondo_login.jpg']}") center/cover no-repeat fixed;
 }
 
 .signup-page {
     background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
-                url("../imgs/fondo_login.jpg") center/cover no-repeat;
+                url("#{resource['imgs:fondo_login.jpg']}") center/cover no-repeat;
 }
 
 /* login y signup: blur del fondo */
@@ -93,7 +93,7 @@
   padding-bottom: 40px;
   padding-left: 50px;
   padding-right: 50px;
-  background-image: url("/casino/resources/imgs/fondo_juegos.jpg");
+  background-image: url("#{resource['imgs:fondo_juegos.jpg']}"); /* le dice al servidor q busque la imagen dentro de resources/img */
   background-size: cover;
   background-position: center;
   min-height: 70vh;
@@ -126,7 +126,7 @@
   padding: 12px 0;
 
   /*border-bottom: 1px solid #eee;*/
-  border-color: 1px solid #ffc107;
+  border: 1px solid #ffbf00;
 }
 
 .winner:last-child {
@@ -291,4 +291,6 @@
   .big-win {
     margin-bottom: 20px;
   }
+
+
 }

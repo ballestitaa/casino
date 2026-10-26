@@ -10,14 +10,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><ui:insert name="title">Iniciar sesión</ui:insert> · RoyalSpin</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-          crossorigin="anonymous" />
-    <h:outputStylesheet library="css" name="styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/styles.css" />
+
+    <h:head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title><ui:insert name="title">Iniciar sesión</ui:insert> · RoyalSpin</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="#{request.contextPath}/resources/css/styles.css" />
+
+
+        <!-- los estilos del primefaces me mataban los estilos de los inputs, botones...
+        asi que he tenido que hacerlo asi gg -->
+        <style>
+            /* 1. Fondo de la pantalla */
+            .login-page {
+                background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
+                url("#{request.contextPath}/resources/imgs/fondo_login.jpg") center/cover no-repeat fixed !important;
+            }
+
+            /* 2. Neutralizar a PrimeFaces en los inputs */
+            body input.form-control,
+            body input.form-control-lg {
+                background-color: #212529 !important;
+                color: #fff !important;
+                border: 1px solid #495057 !important;
+                border-radius: 0.5rem !important;
+                padding: 0.5rem 1rem !important;
+            }
+
+            body input.form-control:focus,
+            body input.form-control-lg:focus {
+                background-color: #212529 !important;
+                color: #fff !important;
+                border-color: #ffbf00 !important;
+                box-shadow: 0 0 0 0.25rem rgba(255, 191, 0, 0.25) !important;
+            }
+
+            /* 3. Forzar el botón dorado de Bootstrap */
+            body .btn-primary,
+            body input[type="submit"].btn-primary {
+                background-color: #ffbf00 !important;
+                border-color: #ffbf00 !important;
+                color: #000 !important;
+                font-weight: 700 !important;
+            }
+        </style>
+
+        <ui:insert name="head" />
+    </h:head>
+
     <ui:insert name="head" />
 </h:head>
 
-<h:body styleClass="login-page">
+<h:body class="login-page">
     <a href="#{request.contextPath}" class="btn btn-outline-light btn-sm position-absolute top-0 start-0 m-3 m-sm-4">
         ← Volver al inicio
     </a>
@@ -30,9 +78,7 @@
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <ui:insert name="scripts" />
 </h:body>
 </html>
