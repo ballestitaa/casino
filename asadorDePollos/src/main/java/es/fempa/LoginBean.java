@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Named
 @ViewScoped
 public class LoginBean implements Serializable {
-    //@Inject UserBean userBean;
+    @Inject UserBean userBean;
 
     private String usuario;
     private String password;
@@ -50,6 +50,13 @@ public class LoginBean implements Serializable {
         if(usuario.equals("user") && password.equals("pass")) {
             mensaje = "Login exitoso";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Login exitoso", null));
+
+            /*
+            userBean.setUsuario(usuario);
+            userBean.setNombre("Nombre del Usuario");
+            userBean.setLoggedIn(true);
+            */
+
         } else {
             mensaje = "Usuario o contraseña incorrectos";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrectos", null));

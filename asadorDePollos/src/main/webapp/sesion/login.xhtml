@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
-                template="/WEB-INF/templates/templateAuth.xhtml">
+                template="/WEB-INF/templates/templateAuth.xhtml"
+                xmlns:p="primefaces">
 
     <ui:define name="title">Iniciar sesión</ui:define>
 
@@ -15,31 +16,23 @@
             <h2 class="h3 fw-bold text-center mb-4">Iniciar sesión</h2>
 
             <h:form id="formLogin" styleClass="row g-3">
-                <!-- Mensajes globales de error (por ejemplo, fallo de credenciales) -->
                 <div class="col-12">
-                    <h:messages globalOnly="true" styleClass="alert alert-danger list-unstyled mb-0 py-2 small" />
+                    <p:messages id="msgs" globalOnly="true" closable="true" showDetail="false" showSummary="true" />
                 </div>
 
                 <div class="col-12">
-                    <label for="email" class="form-label text-uppercase small">Correo electrónico</label>
-                    <h:inputText id="email"
+                    <label for="usuario" class="form-label text-uppercase small">Usuario</label>
+                    <h:inputText id="usuario"
                                  value="#{loginBean.usuario}"
                                  styleClass="form-control form-control-lg"
-                                 autocomplete="email"
-                                 required="true"
-                                 requiredMessage="El correo electrónico es obligatorio.">
-                    </h:inputText>
-                    <h:message for="email" styleClass="text-danger small mt-1 d-block" />
+                    />
                 </div>
 
                 <div class="col-12">
                     <label for="password" class="form-label text-uppercase small">Contraseña</label>
                     <h:inputSecret id="password"
                                    value="#{loginBean.password}"
-                                   styleClass="form-control form-control-lg"
-                                   required="true"
-                                   requiredMessage="La contraseña es obligatoria." />
-                    <h:message for="password" styleClass="text-danger small mt-1 d-block" />
+                                   styleClass="form-control form-control-lg"/>
                 </div>
 
                 <div class="col-12 text-end">
