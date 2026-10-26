@@ -1,18 +1,18 @@
 .hero-section {
-    background-size: cover;
-    background-position: center;
-    min-height: 90vh;
+  background: transparent !important;
+  background-color: transparent !important;
+  min-height: 85vh;
 }
 
 /* login y signup: fondo con imagen */
 .login-page {
-    background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
-    url("#{resource['imgs:fondo_login.jpg']}") center/cover no-repeat fixed;
+  background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
+  url("../imgs/fondo_login.jpg") center/cover no-repeat fixed;
 }
 
 .signup-page {
-    background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
-                url("#{resource['imgs:fondo_login.jpg']}") center/cover no-repeat;
+  background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
+  url("../imgs/fondo_login.jpg") center/cover no-repeat;
 }
 
 /* login y signup: blur del fondo */
@@ -93,7 +93,7 @@
   padding-bottom: 40px;
   padding-left: 50px;
   padding-right: 50px;
-  background-image: url("#{resource['imgs:fondo_juegos.jpg']}"); /* le dice al servidor q busque la imagen dentro de resources/img */
+  background-image: url("../imgs/fondo_juegos.jpg");
   background-size: cover;
   background-position: center;
   min-height: 70vh;
