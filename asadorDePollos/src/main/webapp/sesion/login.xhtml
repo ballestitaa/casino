@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                template="/WEB-INF/templates/templateAuth.xhtml">
+
+    <ui:define name="title">Iniciar sesión</ui:define>
+
+    <ui:define name="content">
+        <div class="login-card card bg-dark text-white p-4 p-sm-5 border-warning">
+            <div class="text-center mb-4">
+                <img src="#{request.contextPath}/resources/imgs/logo.png" alt="Logo" width="40" height="32" class="mb-2" />
+                <h1 class="h4 fw-bold mb-0">ROYALSPIN</h1>
+            </div>
+
+            <h2 class="h3 fw-bold text-center mb-4">Iniciar sesión</h2>
+
+            <h:form id="formLogin" styleClass="row g-3">
+                <!-- Mensajes globales de error (por ejemplo, fallo de credenciales) -->
+                <div class="col-12">
+                    <h:messages globalOnly="true" styleClass="alert alert-danger list-unstyled mb-0 py-2 small" />
+                </div>
+
+                <div class="col-12">
+                    <label for="email" class="form-label text-uppercase small">Correo electrónico</label>
+                    <h:inputText id="email"
+                                 value="#{loginBean.usuario}"
+                                 styleClass="form-control form-control-lg"
+                                 autocomplete="email"
+                                 required="true"
+                                 requiredMessage="El correo electrónico es obligatorio.">
+                    </h:inputText>
+                    <h:message for="email" styleClass="text-danger small mt-1 d-block" />
+                </div>
+
+                <div class="col-12">
+                    <label for="password" class="form-label text-uppercase small">Contraseña</label>
+                    <h:inputSecret id="password"
+                                   value="#{loginBean.password}"
+                                   styleClass="form-control form-control-lg"
+                                   required="true"
+                                   requiredMessage="La contraseña es obligatoria." />
+                    <h:message for="password" styleClass="text-danger small mt-1 d-block" />
+                </div>
+
+                <div class="col-12 text-end">
+                    <a href="#" class="link-primary small text-decoration-none">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <div class="col-12">
+                    <h:commandButton value="Entrar"
+                                     action="#{loginBean.login()}"
+                                     styleClass="btn btn-primary btn-lg w-100 fw-bold" />
+                </div>
+
+                <div class="col-12">
+                    <p class="text-center small text-body-secondary mb-0">
+                        ¿No tienes cuenta?
+                        <a href="#{request.contextPath}/sesion/signup.xhtml" class="link-primary fw-bold text-decoration-none">Regístrate</a>
+                    </p>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

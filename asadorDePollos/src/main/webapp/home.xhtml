@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:p="primefaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+  <ui:define name="content">
+    <!-- HERO -->
+    <header class="hero-section d-flex align-items-center text-center text-white">
+      <div class="container py-5">
+        <h1 class="display-4 fw-bold">¡BIENVENIDO AL MEJOR CASINO ONLINE!</h1>
+        <p class="lead text-body-secondary">Juega y gana premios increíbles con nuestros juegos exclusivos.</p>
+        <div class="d-flex justify-content-center gap-3 my-4">
+          <a href="#juegos" class="btn btn-primary btn-lg fw-bold">Jugar ahora</a>
+          <a href="#{request.contextPath}/leaderboard.xhtml" class="btn btn-outline-primary btn-lg fw-bold">Ver Leaderboard</a>
+        </div>
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-4 mt-4">
+          <span>🎰 +1000 juegos</span>
+          <span>🎁 Bonos diarios</span>
+          <span>🎧 Soporte 24/7</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- JUEGOS DESTACADOS -->
+    <section id="juegos" class="container py-5">
+      <h2 class="fw-bold mb-4">Juegos destacados</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+
+        <!-- RULETA -->
+        <div class="col">
+          <div class="card h-100 bg-dark text-white border-warning hover-animado">
+            <img src="#{request.contextPath}/resources/imgs/juegos/ruleta.jpg" class="card-img-top" alt="Ruleta en vivo" style="height: 175px;" />
+            <div class="card-body">
+              <h3 class="h5 card-title">Ruleta en vivo</h3>
+              <p class="card-text text-body-secondary">Live roulette table, live croupier.</p>
+              <a href="#{request.contextPath}/ruleta.xhtml" class="btn btn-primary w-100 fw-bold">Jugar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLACKJACK -->
+        <div class="col">
+          <div class="card h-100 bg-dark text-white border-warning hover-animado">
+            <img src="#{request.contextPath}/resources/imgs/juegos/blackjack.jpg" class="card-img-top" alt="Blackjack Royal" style="height: 175px;" />
+            <div class="card-body">
+              <h3 class="h5 card-title">Blackjack Royal</h3>
+              <p class="card-text text-body-secondary">Cartas, chips y dealer en vivo.</p>
+              <a href="#{request.contextPath}/blackjack.xhtml" class="btn btn-primary w-100 fw-bold">Jugar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- POKER -->
+        <div class="col">
+          <div class="card h-100 bg-dark text-white border-warning hover-animado">
+            <img src="#{request.contextPath}/resources/imgs/juegos/poker.jpg" class="card-img-top" alt="Póker Classic" style="height: 175px;" />
+            <div class="card-body">
+              <h3 class="h5 card-title">Póker Classic</h3>
+              <p class="card-text text-body-secondary">Mesa de póker con jugadores en vivo.</p>
+              <a href="#{request.contextPath}/poker.xhtml" class="btn btn-primary w-100 fw-bold">Jugar</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PIROTS 3 -->
+        <div class="col">
+          <div class="card h-100 bg-dark text-white border-warning hover-animado">
+            <img src="#{request.contextPath}/resources/imgs/juegos/tragaperras.jpg" class="card-img-top" alt="Pirots 3" style="height: 175px;" />
+            <div class="card-body">
+              <h3 class="h5 card-title">Pirots 3</h3>
+              <p class="card-text text-body-secondary">Tragaperras del viejo oeste con premios increíbles.</p>
+              <a href="#{request.contextPath}/pirots.xhtml" class="btn btn-primary w-100 fw-bold">Jugar</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </ui:define>
+
+</ui:composition>
