@@ -66,4 +66,27 @@ public class UserBean implements Serializable {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    public void logout() {
+        this.usuario = null;
+        this.nombre = null;
+        this.loggedIn = false;
+        this.saldo = 0.0f;
+        this.email = null;
+        this.rol = null;
+
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String comprobarSesion() {
+        if (!loggedIn) {
+            return "/sesion/login.xhtml?faces-redirect=true";
+        }
+        return null;
+    }
 }

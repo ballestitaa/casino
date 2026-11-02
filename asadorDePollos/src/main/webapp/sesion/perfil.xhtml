@@ -2,7 +2,12 @@
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
                 xmlns:p="primefaces"
-                template="/WEB-INF/templates/template.xhtml">
+                template="/WEB-INF/templates/template.xhtml"
+                xmlns:f="jakarta.faces.core">
+
+    <f:metadata>
+        <f:viewAction action="#{userBean.comprobarSesion}" />
+    </f:metadata>
 
     <ui:define name="title">Mi Perfil</ui:define>
 
@@ -23,9 +28,15 @@
                 <div class="col-md-3 d-flex flex-column justify-content-center flex-grow-1">
                     <div>
                         <img class="rounded-circle mb-3" src="https://i.pravatar.cc/300" alt="Foto de perfil" width="150" height="150" />
-                        <h1 class="mt-2">Nombre</h1>
-                        <h2>Saldo Actual: <span class="text-warning">100$</span></h2>
+                        <h1 class="mt-2">#{userBean.nombre}</h1>
+                        <h2>Saldo Actual: <span class="text-warning">#{userBean.saldo}$</span></h2>
                     </div>
+                    <h:form>
+                        <p:commandButton value="Cerrar Sesión"
+                                         action="#{userBean.logout()}"
+                                         ajax="false"
+                                         styleClass="btn btn-primary btn-lg fw-bold" />
+                    </h:form>
                 </div>
 
                 <!-- Historial reciente -->

@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                template="/WEB-INF/templates/templateAuth.xhtml"
+                xmlns:p="primefaces">
+
+    <ui:define name="title">Registro</ui:define>
+
+    <ui:define name="content">
+        <div class="login-card card bg-dark text-white p-4 p-sm-5 border-warning">
+            <div class="text-center mb-4">
+                <img src="#{request.contextPath}/resources/imgs/logo.png" alt="Logo" width="40" height="32" class="mb-2" />
+                <h1 class="h4 fw-bold mb-0">ROYALSPIN</h1>
+            </div>
+
+            <h2 class="h3 fw-bold text-center mb-4">Crear cuenta</h2>
+
+            <h:form id="formRegister" styleClass="row g-3">
+                <div class="col-12">
+                    <p:messages id="msgs" globalOnly="true" closable="true" showDetail="false" showSummary="true" />
+                </div>
+
+                <div class="col-12">
+                    <label for="nombre" class="form-label text-uppercase small">Nombre completo</label>
+                    <h:inputText id="nombre"
+                                 value="#{registerBean.nombre}"
+                                 styleClass="form-control form-control-lg"
+                    />
+                </div>
+
+                <div class="col-12">
+                    <label for="email" class="form-label text-uppercase small">Correo electrónico</label>
+                    <h:inputText id="email"
+                                 value="#{registerBean.email}"
+                                 styleClass="form-control form-control-lg"
+                    />
+                </div>
+
+                <div class="col-12">
+                    <label for="usuario" class="form-label text-uppercase small">Usuario</label>
+                    <h:inputText id="usuario"
+                                 value="#{registerBean.usuario}"
+                                 styleClass="form-control form-control-lg"
+                    />
+                </div>
+
+                <div class="col-12">
+                    <label for="password" class="form-label text-uppercase small">Contraseña</label>
+                    <h:inputSecret id="password"
+                                   value="#{registerBean.password}"
+                                   styleClass="form-control form-control-lg"/>
+                </div>
+
+                <div class="col-12">
+                    <label for="password2" class="form-label text-uppercase small">Confirmar contraseña</label>
+                    <h:inputSecret id="password2"
+                                   value="#{registerBean.password2}"
+                                   styleClass="form-control form-control-lg"/>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <h:commandButton value="Registrarse"
+                                     action="#{registerBean.registrar()}"
+                                     styleClass="btn btn-primary btn-lg w-100 fw-bold" />
+                </div>
+
+                <div class="col-12">
+                    <p class="text-center small text-body-secondary mb-0">
+                        ¿Ya tienes cuenta?
+                        <a href="#{request.contextPath}/sesion/login.xhtml" class="link-primary fw-bold text-decoration-none">Inicia sesión</a>
+                    </p>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>
