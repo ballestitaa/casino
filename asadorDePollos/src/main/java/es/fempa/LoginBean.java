@@ -22,7 +22,6 @@ public class LoginBean implements Serializable {
 
     private String usuario;
     private String password;
-    private String mensaje;
 
     @PostConstruct
     public void init() {
@@ -39,9 +38,8 @@ public class LoginBean implements Serializable {
 
     public String login() {
         if (usuario == null || usuario.isBlank() || password == null || password.isBlank()) {
-            mensaje = "El usuario y la contraseña son obligatorios";
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, mensaje, null));
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "El usuario y la contraseña son obligatorios", null));
             return null;
         }
         if (userService != null && userService.getUsers() != null) {
@@ -60,9 +58,9 @@ public class LoginBean implements Serializable {
                 }
             }
         }
-        mensaje = "Usuario o contraseña incorrectos";
+
         FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, mensaje, null));
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrectos", null));
         return null;
     }
 
@@ -82,11 +80,4 @@ public class LoginBean implements Serializable {
         this.password = password;
     }
 
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
 }

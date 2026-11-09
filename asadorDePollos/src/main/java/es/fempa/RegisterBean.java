@@ -6,9 +6,11 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.io.Serializable;
+
 @Named
 @RequestScoped
-public class RegisterBean {
+public class RegisterBean implements Serializable {
     private String nombre;
     private String email;
     private String usuario;
@@ -25,21 +27,47 @@ public class RegisterBean {
         this.password2 = password2;
     }
 
-    public void registrar() {
-        if (!password2.equals(password)) {
-            String mensaje = "Las contraseñas no coinciden";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Las contraseñas no coinciden", null));
-            return;
+    public String registrar() {
+
+        // comprobar que todos los campos esten llenos
+        if(usuario == null || usuario.isBlank() || password == null || password.isBlank() || nombre == null || nombre.isBlank() || email == null || email.isBlank()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Todos los campos son obligatorios", null));
+            return null;
         }
 
+        // comprobar que el usuario no exista
+        if (userService.getUsers() != null) {
+            for (User u : userService.getUsers()) {
+                if (u.getUsuario().equalsIgnoreCase(usuario.trim())) {
+                    FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario ya existe", null));
+                    return null;
+                }
+            }
+        }
+
+        // comprobar que las contraseñas coincidan
+        if (!password2.equals(password)) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Las contraseñas no coinciden", null));
+            return null;
+        }
+
+        // quitar espacios al principio y al final por si se ponen por accidente
+        usuario = usuario.trim();
+        email = email.trim();
 
         User user = new User(usuario, password, nombre, 100.0f, email, "user");
         userService.register(user);
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario registrado correctamente", null));
+
+
+
+        return "/sesion/login.xhtml?faces-redirect=true";
     }
 
     public String getNombre() {
