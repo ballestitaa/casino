@@ -41,8 +41,19 @@
                     </a>
                 </div>
 
-                <!-- PERFIL -->
+
+
+
+
                 <div class="navbar-nav ms-auto align-items-center">
+                    <!-- Saldo actual -->
+                    <div class="navbar-nav ms-auto mr-1">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">
+                            <i class="bi bi-wallet"></i> Saldo: #{userBean.saldo} €
+                        </a>
+                    </div>
+
+                    <!-- PERFIL -->
                     <a href="#{request.contextPath}/sesion/perfil.xhtml" class="nav-link">
                         <img width="40" height="40" class="rounded-circle" src="https://i.pravatar.cc/300" alt="Perfil" />
                         <span style="margin-left: 10px;">Mi perfil</span>

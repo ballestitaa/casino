@@ -14,8 +14,8 @@ public class RegisterBean implements Serializable {
     private String nombre;
     private String email;
     private String usuario;
-    private String password = "";
-    private String password2 = "";
+    private String password;
+    private String password2;
 
     @Inject UserService userService;
 
@@ -59,8 +59,15 @@ public class RegisterBean implements Serializable {
 
         User user = new User(usuario, password, nombre, 100.0f, email, "user");
         userService.register(user);
-        return "/login.xhtml?faces-redirect=true";
 
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario registrado correctamente", null));
+
+
+
+        return "/sesion/login.xhtml?faces-redirect=true";
     }
 
     public String getNombre() {
