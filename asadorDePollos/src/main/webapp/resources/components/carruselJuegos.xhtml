@@ -1,5 +1,6 @@
 <ui:component xmlns="http://www.w3.org/1999/xhtml"
               xmlns:ui="jakarta.faces.facelets"
+              xmlns:h="jakarta.faces.html"
               xmlns:composite="jakarta.faces.composite"
               xmlns:p="primefaces">
 
@@ -12,25 +13,30 @@
   </composite:interface>
 
   <composite:implementation>
-    <h2 class="fw-bold mb-4">#{cc.attrs.titulo}</h2>
+    <!-- Parche de PrimeFaces para el bucle infinito de una en una (ver el propio js) -->
+    <h:outputScript name="js/carruselInfinito.js" />
 
-    <p:carousel value="#{cc.attrs.lista}" var="juego"
-                numVisible="#{cc.attrs.visibles}" numScroll="1"
-                circular="true" autoplayInterval="#{cc.attrs.intervalo}"
-                responsiveOptions="#{cc.attrs.responsive}"
-                styleClass="carrusel-juegos">
-      <!-- padding vertical para que el hover (translateY -10px) no se corte -->
-      <div class="px-2 py-3 h-100">
-        <div class="card h-100 bg-dark text-white border-warning hover-animado">
-          <img src="#{request.contextPath}/resources/imgs/juegos/#{juego.imagen}" class="card-img-top img-juego" alt="#{juego.nombre}" />
-          <div class="card-body">
-            <h3 class="h5 card-title">#{juego.nombre}</h3>
-            <p class="card-text text-body-secondary">#{juego.descripcion}</p>
-            <a href="#{request.contextPath}#{juego.url}" class="btn btn-primary w-100 fw-bold">Jugar</a>
+    <div class="carrusel-juegos-wrap">
+      <h2 class="fw-bold mb-4">#{cc.attrs.titulo}</h2>
+
+      <p:carousel value="#{cc.attrs.lista}" var="juego"
+                  numVisible="#{cc.attrs.visibles}" numScroll="1"
+                  circular="true" autoplayInterval="#{cc.attrs.intervalo}"
+                  responsiveOptions="#{cc.attrs.responsive}"
+                  styleClass="carrusel-juegos carrusel-infinito">
+        <!-- padding vertical para que el hover (translateY -10px) no se corte -->
+        <div class="px-2 py-3 h-100">
+          <div class="card h-100 bg-dark text-white border-warning hover-animado">
+            <img src="#{request.contextPath}/resources/imgs/juegos/#{juego.imagen}" class="card-img-top img-juego" alt="#{juego.nombre}" />
+            <div class="card-body d-flex flex-column">
+              <h3 class="h5 card-title titulo-juego">#{juego.nombre}</h3>
+              <p class="card-text text-body-secondary desc-juego">#{juego.descripcion}</p>
+              <a href="#{request.contextPath}#{juego.url}" class="btn btn-primary w-100 fw-bold mt-auto">Jugar</a>
+            </div>
           </div>
         </div>
-      </div>
-    </p:carousel>
+      </p:carousel>
+    </div>
   </composite:implementation>
 
 </ui:component>

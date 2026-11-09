@@ -295,16 +295,48 @@
 
 }
 
+
 /* ==============================
-   CARRUSEL DE JUEGOS (p:carousel, PrimeFaces 15)
-   Se usa "body .carrusel-juegos.ui-carousel" para ganar
-   en especificidad al tema (body .ui-carousel ...)
+   CARRUSEL DE JUEGOS (p:carousel, PrimeFaces 15.0.9)
+   HTML real que genera PF 15:
+     div.ui-carousel.carrusel-juegos > .ui-carousel-content >
+       .ui-carousel-container > button.ui-carousel-prev / .ui-carousel-next
+       ul.ui-carousel-indicators > li.ui-carousel-indicator[.ui-state-highlight] > button.ui-link
+   El tema saga-blue usa "body .ui-carousel ..."; aqui se antepone
+   ".carrusel-juegos" para tener siempre mas especificidad.
    ============================== */
 
-/* Imagen de la tarjeta: misma altura para todos los juegos */
+/* Tamano: maximo 900px y centrado (titulo incluido) */
+.carrusel-juegos-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Todas las imagenes iguales: misma proporcion, recortadas sin deformar */
 .img-juego {
-  height: 220px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
   object-fit: cover;
+  flex-shrink: 0; /* .card es flex en columna: sin esto la imagen encoge */
+}
+
+/* Titulo en una sola linea */
+.titulo-juego {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Descripcion: alto fijo de 2 lineas, lo que sobra se corta */
+.desc-juego {
+  line-height: 1.5;
+  height: 3em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 /* Contenedor transparente (tema oscuro) */
@@ -316,7 +348,7 @@ body .carrusel-juegos.ui-carousel .ui-carousel-items-content {
   border: 0 none;
 }
 
-/* Flechas de navegación */
+/* Flechas de navegacion */
 body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-prev,
 body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next {
   color: #ffbf00;
@@ -329,20 +361,41 @@ body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next:hover {
   background: rgba(255, 191, 0, 0.15);
 }
 
+/* Sin anillo azul de foco (tema: box-shadow azul; navegador: outline) */
 body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-prev:focus,
-body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next:focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 191, 0, 0.5);
+body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next:focus,
+body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-prev:focus-visible,
+body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next:focus-visible,
+body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator button:focus,
+body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator button:focus-visible {
+  outline: 0 none;
+  box-shadow: none;
 }
 
-/* Puntos indicadores */
+/* Puntos indicadores: grises, el activo en dorado */
+body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator,
+body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator.ui-state-highlight {
+  background: transparent;
+  border: 0 none;
+}
+
 body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator button {
-  background-color: #495057;
+  background: #495057;
 }
 
 body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator button:hover {
-  background-color: #6c757d;
+  background: #6c757d;
 }
 
 body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator.ui-state-highlight button {
-  background-color: #ffbf00;
+  background: #ffbf00;
+}
+
+/* Movil: flechas mas estrechas para dejar sitio a la tarjeta */
+@media (max-width: 767.98px) {
+  body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-prev,
+  body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next {
+    width: 1.5rem;
+    margin: 0;
+  }
 }
