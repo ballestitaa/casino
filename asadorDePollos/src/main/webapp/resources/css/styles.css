@@ -177,7 +177,7 @@
 
 .game-area {
   height: 360px;
-  background-image: url("#{resource['imgs:imagen_BlackJack.jpg']}"); /* Ruta de tu imagen */
+  background-image: url("#{resource['imgs:juegos/blackjack.jpg']}"); /* Ruta de tu imagen */
   background-size: cover; /* Hace que la imagen cubra todo el recuadro sin deformarse */
   background-repeat: no-repeat;
   background-position: center; /* Centra la imagen en el contenedor */
@@ -195,15 +195,15 @@
 /* Imagen de cada juego (el Blackjack usa la de .game-area) */
 
 .game-ruleta {
-  background-image: url("#{resource['imgs:imagen_Ruleta.jpg']}");
+  background-image: url("#{resource['imgs:juegos/ruleta.jpg']}");
 }
 
 .game-poker {
-  background-image: url("#{resource['imgs:imagen_Poker.jpg']}");
+  background-image: url("#{resource['imgs:juegos/poker.jpg']}");
 }
 
 .game-pirots {
-  background-image: url("#{resource['imgs:imagen_Pirots.jpg']}");
+  background-image: url("#{resource['imgs:juegos/tragaperras.jpg']}");
 }
 
 /* Información inferior */
