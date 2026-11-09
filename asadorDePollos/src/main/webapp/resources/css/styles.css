@@ -294,3 +294,55 @@
 
 
 }
+
+/* ==============================
+   CARRUSEL DE JUEGOS (p:carousel, PrimeFaces 15)
+   Se usa "body .carrusel-juegos.ui-carousel" para ganar
+   en especificidad al tema (body .ui-carousel ...)
+   ============================== */
+
+/* Imagen de la tarjeta: misma altura para todos los juegos */
+.img-juego {
+  height: 220px;
+  object-fit: cover;
+}
+
+/* Contenedor transparente (tema oscuro) */
+body .carrusel-juegos.ui-carousel,
+body .carrusel-juegos.ui-carousel .ui-carousel-content,
+body .carrusel-juegos.ui-carousel .ui-carousel-container,
+body .carrusel-juegos.ui-carousel .ui-carousel-items-content {
+  background: transparent;
+  border: 0 none;
+}
+
+/* Flechas de navegación */
+body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-prev,
+body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next {
+  color: #ffbf00;
+  background: transparent;
+}
+
+body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-prev:hover,
+body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next:hover {
+  color: #ffbf00;
+  background: rgba(255, 191, 0, 0.15);
+}
+
+body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-prev:focus,
+body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 191, 0, 0.5);
+}
+
+/* Puntos indicadores */
+body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator button {
+  background-color: #495057;
+}
+
+body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator button:hover {
+  background-color: #6c757d;
+}
+
+body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator.ui-state-highlight button {
+  background-color: #ffbf00;
+}
