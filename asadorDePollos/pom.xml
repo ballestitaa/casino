@@ -152,7 +152,7 @@
                                     <target>
                                         <copy
                                             file="${project.build.directory}/${project.build.finalName}.war"
-                                            todir="C:\Program Files\Apache Software Foundation\Tomcat 11.0\webapps"
+                                            todir="${env.CATALINA_HOME}/webapps"
                                             overwrite="true"
                                         />
                                     </target>
