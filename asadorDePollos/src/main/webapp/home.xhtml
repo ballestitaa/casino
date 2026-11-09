@@ -3,16 +3,19 @@
                 xmlns:ui="jakarta.faces.facelets"
                 xmlns:p="primefaces"
                 template="/WEB-INF/templates/template.xhtml"
-                xmlns:f="jakarta.faces.core">
+                xmlns:f="jakarta.faces.core"
+                xmlns:comp="jakarta.faces.composite/components">
 
   <f:metadata>
     <f:viewAction action="#{userBean.comprobarSesion}" />
+    <!-- mensaje de bienvenida tras el login (se muestra una vez en el growl) -->
+    <f:viewAction action="#{userBean.mostrarBienvenida}" />
   </f:metadata>
 
   <ui:define name="content">
-    <!-- HERO -->
-    <header class="hero-section d-flex align-items-center text-center text-white">
-      <div class="container py-5">
+    <!-- HERO (compacto: sin el min-height de 85vh que usa index) -->
+    <header class="hero-section hero-compacto d-flex align-items-center text-center text-white">
+      <div class="container pt-5 pb-3">
         <h1 class="display-4 fw-bold">¡BIENVENIDO AL MEJOR CASINO ONLINE!</h1>
         <p class="lead text-body-secondary">Juega y gana premios increíbles con nuestros juegos exclusivos.</p>
         <div class="d-flex justify-content-center gap-3 my-4">
@@ -28,59 +31,12 @@
     </header>
 
     <!-- JUEGOS DESTACADOS -->
-    <section id="juegos" class="container py-5">
-      <h2 class="fw-bold mb-4">Juegos destacados</h2>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-
-        <!-- RULETA -->
-        <div class="col">
-          <div class="card h-100 bg-dark text-white border-warning hover-animado">
-            <img src="#{request.contextPath}/resources/imgs/juegos/ruleta.jpg" class="card-img-top" alt="Ruleta en vivo" style="height: 175px;" />
-            <div class="card-body">
-              <h3 class="h5 card-title">Ruleta en vivo</h3>
-              <p class="card-text text-body-secondary">Live roulette table, live croupier.</p>
-              <a href="#{request.contextPath}/ruleta.xhtml" class="btn btn-primary w-100 fw-bold">Jugar</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- BLACKJACK -->
-        <div class="col">
-          <div class="card h-100 bg-dark text-white border-warning hover-animado">
-            <img src="#{request.contextPath}/resources/imgs/juegos/blackjack.jpg" class="card-img-top" alt="Blackjack Royal" style="height: 175px;" />
-            <div class="card-body">
-              <h3 class="h5 card-title">Blackjack Royal</h3>
-              <p class="card-text text-body-secondary">Cartas, chips y dealer en vivo.</p>
-              <a href="#{request.contextPath}/blackjack.xhtml" class="btn btn-primary w-100 fw-bold">Jugar</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- POKER -->
-        <div class="col">
-          <div class="card h-100 bg-dark text-white border-warning hover-animado">
-            <img src="#{request.contextPath}/resources/imgs/juegos/poker.jpg" class="card-img-top" alt="Póker Classic" style="height: 175px;" />
-            <div class="card-body">
-              <h3 class="h5 card-title">Póker Classic</h3>
-              <p class="card-text text-body-secondary">Mesa de póker con jugadores en vivo.</p>
-              <a href="#{request.contextPath}/poker.xhtml" class="btn btn-primary w-100 fw-bold">Jugar</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- PIROTS 3 -->
-        <div class="col">
-          <div class="card h-100 bg-dark text-white border-warning hover-animado">
-            <img src="#{request.contextPath}/resources/imgs/juegos/tragaperras.jpg" class="card-img-top" alt="Pirots 3" style="height: 175px;" />
-            <div class="card-body">
-              <h3 class="h5 card-title">Pirots 3</h3>
-              <p class="card-text text-body-secondary">Tragaperras del viejo oeste con premios increíbles.</p>
-              <a href="#{request.contextPath}/pirots.xhtml" class="btn btn-primary w-100 fw-bold">Jugar</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <section id="juegos" class="container pt-4 pb-5">
+      <comp:carruselJuegos titulo="Juegos destacados"
+                           lista="#{juegoBean.juegos}"
+                           visibles="3"
+                           intervalo="3000"
+                           responsive="#{juegoBean.responsiveOptions}" />
     </section>
   </ui:define>
 

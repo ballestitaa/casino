@@ -3,24 +3,19 @@
 <html lang="es" data-bs-theme="dark"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
-      xmlns:ui="jakarta.faces.facelets">
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core">
 
 <h:head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><ui:insert name="title">Iniciar sesión</ui:insert> · RoyalSpin</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="#{request.contextPath}/resources/css/styles.css" />
-
-    <h:head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title><ui:insert name="title">Iniciar sesión</ui:insert> · RoyalSpin</title>
-
+    <!-- Bootstrap en el facet "first": se pinta antes que styles.css (h:outputStylesheet) -->
+    <f:facet name="first">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="#{request.contextPath}/resources/css/styles.css" />
-
+    </f:facet>
+    <h:outputStylesheet library="css" name="styles.css" />
 
         <!-- los estilos del primefaces me mataban los estilos de los inputs, botones...
         asi que he tenido que hacerlo asi gg -->
@@ -58,9 +53,6 @@
                 font-weight: 700 !important;
             }
         </style>
-
-        <ui:insert name="head" />
-    </h:head>
 
     <ui:insert name="head" />
 </h:head>

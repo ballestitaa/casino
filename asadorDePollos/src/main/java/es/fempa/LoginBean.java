@@ -53,6 +53,8 @@ public class LoginBean implements Serializable {
                     userBean.setRol(u.getRol());
                     userBean.setSaldo(u.getSaldo());
                     userBean.setLoggedIn(true);
+                    // sin Flash: el mensaje se guarda en sesion y home lo muestra una vez
+                    userBean.setMensajeBienvenida("¡Bienvenido, " + u.getNombre() + "!");
 
                     return "/home.xhtml?faces-redirect=true";
                 }

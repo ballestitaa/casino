@@ -11,14 +11,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RoyalSpin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-          crossorigin="anonymous" />
-    <link rel="stylesheet" href="#{request.contextPath}/resources/css/styles.css" />
-    <!-- <h:outputStylesheet library="css" name="styles.css" /> -->
+    <!-- Bootstrap en el facet "first": PrimeFaces lo pinta antes que sus recursos y que
+         styles.css (h:outputStylesheet), así styles.css sigue ganando a Bootstrap -->
+    <f:facet name="first">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+              crossorigin="anonymous" />
+    </f:facet>
+    <h:outputStylesheet library="css" name="styles.css" />
 </h:head>
 
 <h:body>
+    <!-- Mensajes globales (p. ej. la bienvenida tras el login) -->
+    <p:growl id="growl" globalOnly="true" showDetail="false" life="4000" />
+
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
