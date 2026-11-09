@@ -6,7 +6,7 @@ public class Juego implements Serializable {
 
     private String nombre;
     private String descripcion;
-    private String imagen; // nombre del archivo en resources/imgs/juegos/
+    private String imagen; // ruta relativa a resources/imgs/ (p. ej. "juegos/ruleta.jpg")
     private String url;    // ruta relativa al contexto
 
     public Juego() {

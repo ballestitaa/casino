@@ -18,18 +18,32 @@ public class JuegoBean implements Serializable {
     @PostConstruct
     public void init() {
         juegos = new ArrayList<>();
+        // imagen: ruta relativa a resources/imgs/
         juegos.add(new Juego("Ruleta en vivo", "Live roulette table, live croupier.",
-                "ruleta.jpg", "/juegos/ruleta.html"));
+                "juegos/ruleta.jpg", "/juegos/ruleta.html"));
         juegos.add(new Juego("Blackjack Royal", "Cartas, chips y dealer en vivo.",
-                "blackjack.jpg", "/juegos/blackjack.html"));
+                "juegos/blackjack.jpg", "/juegos/blackjack.html"));
         juegos.add(new Juego("Póker Classic", "Mesa de póker con jugadores en vivo.",
-                "poker.jpg", "/juegos/poker.html"));
+                "juegos/poker.jpg", "/juegos/poker.html"));
         juegos.add(new Juego("Pirots 3", "Tragaperras del viejo oeste con premios increíbles.",
-                "tragaperras.jpg", "/juegos/pirots.html"));
+                "juegos/tragaperras.jpg", "/juegos/pirots.html"));
+        juegos.add(new Juego("Ruleta Europea", "Un solo cero y apuestas desde 1 €.",
+                "imagen_Ruleta.jpg", "/juegos/juego.html"));
+        juegos.add(new Juego("Blackjack VIP", "Mesa privada con límites altos.",
+                "imagen_BlackJack.jpg", "/juegos/juego.html"));
+        juegos.add(new Juego("Texas Hold'em", "Torneos diarios con botes garantizados.",
+                "imagen_Poker.jpg", "/juegos/juego.html"));
+        juegos.add(new Juego("Gold Rush Slots", "Tragaperras de 5 rodillos con jackpot progresivo.",
+                "imagen_Pirots.jpg", "/juegos/juego.html"));
 
-        // En pantallas de menos de 768px se muestra 1 tarjeta y se avanza de 1 en 1
+        // PrimeFaces aplica la opcion cuyo breakpoint (max-width) cubre el ancho de la ventana:
+        //   >= 1200px -> numVisible del carrusel (3)
+        //   768-1199px -> 2 visibles
+        //   < 768px   -> 1 visible
+        // numScroll = 1 en todos los casos
         responsiveOptions = new ArrayList<>();
-        responsiveOptions.add(new ResponsiveOption("768px", 1, 1));
+        responsiveOptions.add(new ResponsiveOption("1199px", 2, 1));
+        responsiveOptions.add(new ResponsiveOption("767px", 1, 1));
     }
 
     public List<Juego> getJuegos() {

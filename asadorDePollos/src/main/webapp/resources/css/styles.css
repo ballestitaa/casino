@@ -311,18 +311,30 @@
    ".carrusel-juegos" para tener siempre mas especificidad.
    ============================== */
 
-/* Tamano: maximo 760px y centrado (titulo incluido) */
+/* Tamano: maximo 1224px y centrado (titulo incluido).
+   3 visibles x (360px tarjeta + 16px de padding del hueco) + 2 flechas x 48px = 1224px */
 .carrusel-juegos-wrap {
-  max-width: 760px;
+  max-width: 1224px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Cada tarjeta: como mucho 340px, centrada en su hueco del carrusel */
+/* Cada tarjeta: como mucho 360px, centrada en su hueco del carrusel */
 .carrusel-juegos .hueco-juego .card.tarjeta-juego {
-  max-width: 340px;
+  max-width: 360px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* El hueco de cada tarjeta no puede crecer por su contenido (p. ej. un titulo largo
+   en nowrap): sin min-width 0 el item de PF se ensancha y la tarjeta se sale */
+body .carrusel-juegos.ui-carousel .ui-carousel-item {
+  min-width: 0;
+}
+
+/* Las zonas de las tarjetas no deben empujar a las flechas fuera */
+body .carrusel-juegos.ui-carousel .ui-carousel-items-content {
+  min-width: 0;
 }
 
 /* Imagen: altura FIJA identica en todas, recortada sin deformar.
@@ -411,5 +423,15 @@ body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator
   body .carrusel-juegos.ui-carousel .ui-carousel-content .ui-carousel-next {
     width: 1.5rem;
     margin: 0;
+    flex-shrink: 0;
+  }
+
+  /* indicadores mas estrechos para que los 8 quepan en una linea */
+  body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator {
+    margin-right: 0.35rem;
+  }
+
+  body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator button {
+    width: 1.25rem;
   }
 }
