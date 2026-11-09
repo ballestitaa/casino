@@ -19,7 +19,7 @@ public class JuegoBean implements Serializable {
     public void init() {
         juegos = new ArrayList<>();
         // imagen: ruta relativa a resources/imgs/
-        juegos.add(new Juego("Ruleta en vivo", "Live roulette table, live croupier.",
+        juegos.add(new Juego("Ruleta Europea", "Ruleta clásica de un solo cero, con croupier en vivo.",
                 "juegos/ruleta.jpg", "/juegos/ruleta.html"));
         juegos.add(new Juego("Blackjack Royal", "Cartas, chips y dealer en vivo.",
                 "juegos/blackjack.jpg", "/juegos/blackjack.html"));
@@ -27,14 +27,14 @@ public class JuegoBean implements Serializable {
                 "juegos/poker.jpg", "/juegos/poker.html"));
         juegos.add(new Juego("Pirots 3", "Tragaperras del viejo oeste con premios increíbles.",
                 "juegos/tragaperras.jpg", "/juegos/pirots.html"));
-        juegos.add(new Juego("Ruleta Europea", "Un solo cero y apuestas desde 1 €.",
-                "imagen_Ruleta.jpg", "/juegos/juego.html"));
-        juegos.add(new Juego("Blackjack VIP", "Mesa privada con límites altos.",
-                "imagen_BlackJack.jpg", "/juegos/juego.html"));
-        juegos.add(new Juego("Texas Hold'em", "Torneos diarios con botes garantizados.",
-                "imagen_Poker.jpg", "/juegos/juego.html"));
-        juegos.add(new Juego("Gold Rush Slots", "Tragaperras de 5 rodillos con jackpot progresivo.",
-                "imagen_Pirots.jpg", "/juegos/juego.html"));
+        juegos.add(new Juego("Ruleta MegaFire", "Ruleta potenciada con multiplicadores de hasta x500.",
+                "juegos/Ruleta_potenciada.jpg", "/juegos/juego.html"));
+        juegos.add(new Juego("Blackjack Lightning", "Blackjack con cartas relámpago y pagos multiplicados.",
+                "juegos/blackjack_potenciado.jpg", "/juegos/juego.html"));
+        juegos.add(new Juego("Póker Mega Stack", "Torneos con fichas extra y botes garantizados.",
+                "juegos/Poker_Pot.jpg", "/juegos/juego.html"));
+        juegos.add(new Juego("Pirots 3 Turbo", "La tragaperras del oeste con giros extra y jackpot.",
+                "juegos/tragaperras_potenciada.jpg", "/juegos/juego.html"));
 
         // PrimeFaces aplica la opcion cuyo breakpoint (max-width) cubre el ancho de la ventana:
         //   >= 1200px -> numVisible del carrusel (3)
