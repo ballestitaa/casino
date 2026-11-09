@@ -18,6 +18,28 @@ public class UserBean implements Serializable {
     private float saldo;
     private String email;
     private String rol;
+    // Mensaje que se muestra una sola vez en home tras el login (sustituye al Flash)
+    private String mensajeBienvenida;
+
+    public String getMensajeBienvenida() {
+        return mensajeBienvenida;
+    }
+
+    public void setMensajeBienvenida(String mensajeBienvenida) {
+        this.mensajeBienvenida = mensajeBienvenida;
+    }
+
+    /**
+     * viewAction de home: si hay mensaje pendiente lo añade al growl y lo borra,
+     * para que solo se vea una vez.
+     */
+    public void mostrarBienvenida() {
+        if (mensajeBienvenida != null) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, mensajeBienvenida, null));
+            mensajeBienvenida = null;
+        }
+    }
 
     public String getNombre() {
         return nombre;
@@ -74,6 +96,7 @@ public class UserBean implements Serializable {
         this.saldo = 0.0f;
         this.email = null;
         this.rol = null;
+        this.mensajeBienvenida = null;
 
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         try {

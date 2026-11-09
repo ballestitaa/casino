@@ -4,15 +4,20 @@
   min-height: 85vh;
 }
 
+/* home: hero compacto, sin hueco hasta "Juegos destacados" (index sigue con 85vh) */
+.hero-section.hero-compacto {
+  min-height: 0;
+}
+
 /* login y signup: fondo con imagen */
 .login-page {
   background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
-  url("../imgs/fondo_login.jpg") center/cover no-repeat fixed;
+  url("#{resource['imgs:fondo_login.jpg']}") center/cover no-repeat fixed;
 }
 
 .signup-page {
   background: linear-gradient(rgba(14, 11, 26, 0.6), rgba(14, 11, 26, 0.75)),
-  url("../imgs/fondo_login.jpg") center/cover no-repeat;
+  url("#{resource['imgs:fondo_login.jpg']}") center/cover no-repeat;
 }
 
 /* login y signup: blur del fondo */
@@ -93,7 +98,7 @@
   padding-bottom: 40px;
   padding-left: 50px;
   padding-right: 50px;
-  background-image: url("../imgs/fondo_juegos.jpg");
+  background-image: url("#{resource['imgs:fondo_juegos.jpg']}");
   background-size: cover;
   background-position: center;
   min-height: 70vh;
@@ -172,7 +177,7 @@
 
 .game-area {
   height: 360px;
-  background-image: url("../imgs/imagen_BlackJack.jpg"); /* Ruta de tu imagen */
+  background-image: url("#{resource['imgs:imagen_BlackJack.jpg']}"); /* Ruta de tu imagen */
   background-size: cover; /* Hace que la imagen cubra todo el recuadro sin deformarse */
   background-repeat: no-repeat;
   background-position: center; /* Centra la imagen en el contenedor */
@@ -190,15 +195,15 @@
 /* Imagen de cada juego (el Blackjack usa la de .game-area) */
 
 .game-ruleta {
-  background-image: url("../imgs/imagen_Ruleta.jpg");
+  background-image: url("#{resource['imgs:imagen_Ruleta.jpg']}");
 }
 
 .game-poker {
-  background-image: url("../imgs/imagen_Poker.jpg");
+  background-image: url("#{resource['imgs:imagen_Poker.jpg']}");
 }
 
 .game-pirots {
-  background-image: url("../imgs/imagen_Pirots.jpg");
+  background-image: url("#{resource['imgs:imagen_Pirots.jpg']}");
 }
 
 /* Información inferior */
@@ -306,30 +311,39 @@
    ".carrusel-juegos" para tener siempre mas especificidad.
    ============================== */
 
-/* Tamano: maximo 900px y centrado (titulo incluido) */
+/* Tamano: maximo 760px y centrado (titulo incluido) */
 .carrusel-juegos-wrap {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Todas las imagenes iguales: misma proporcion, recortadas sin deformar */
-.img-juego {
+/* Cada tarjeta: como mucho 340px, centrada en su hueco del carrusel */
+.carrusel-juegos .hueco-juego .card.tarjeta-juego {
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Imagen: altura FIJA identica en todas, recortada sin deformar.
+   flex-shrink: 0 porque .card es flex en columna y si no la imagen encoge */
+.carrusel-juegos .tarjeta-juego img.card-img-top.img-juego {
+  display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  height: auto;
+  height: 180px;
   object-fit: cover;
-  flex-shrink: 0; /* .card es flex en columna: sin esto la imagen encoge */
+  flex-shrink: 0;
 }
 
 /* Titulo en una sola linea */
-.titulo-juego {
+.carrusel-juegos .tarjeta-juego .card-title.titulo-juego {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 /* Descripcion: alto fijo de 2 lineas, lo que sobra se corta */
-.desc-juego {
+.carrusel-juegos .tarjeta-juego .card-text.desc-juego {
   line-height: 1.5;
   height: 3em;
   overflow: hidden;
