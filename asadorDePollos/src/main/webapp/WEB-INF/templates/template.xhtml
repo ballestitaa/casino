@@ -53,12 +53,15 @@
 
 
                 <div class="navbar-nav ms-auto align-items-center">
-                    <!-- Saldo actual -->
-                    <div class="navbar-nav ms-auto mr-1">
+                    <!-- Saldo actual: en las salas lo muestra la propia barra de la sala -->
+                    <h:panelGroup layout="block" rendered="#{not enSala}" styleClass="navbar-nav ms-auto mr-1">
                         <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">
-                            <i class="bi bi-wallet"></i> Saldo: #{userBean.saldo} €
+                            <i class="bi bi-wallet"></i> Saldo:
+                            <h:outputText value="#{userBean.saldo}">
+                                <f:convertNumber pattern="#,##0 €" locale="es" />
+                            </h:outputText>
                         </a>
-                    </div>
+                    </h:panelGroup>
 
                     <!-- PERFIL -->
                     <a href="#{request.contextPath}/sesion/perfil.xhtml" class="nav-link">

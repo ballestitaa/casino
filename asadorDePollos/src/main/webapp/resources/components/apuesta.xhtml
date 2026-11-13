@@ -1,0 +1,74 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:ui="jakarta.faces.facelets"
+              xmlns:composite="jakarta.faces.composite"
+              xmlns:h="jakarta.faces.html"
+              xmlns:f="jakarta.faces.core"
+              xmlns:pt="jakarta.faces.passthrough"
+              xmlns:p="primefaces">
+
+  <composite:interface>
+    <composite:attribute name="valor" type="java.lang.Integer" required="true" />
+    <composite:attribute name="saldo" type="java.lang.Integer" required="true" />
+    <composite:attribute name="accion" method-signature="java.lang.String accion()" required="true" />
+    <composite:attribute name="revelar" method-signature="java.lang.String revelar()" required="true" />
+    <composite:attribute name="pendiente" type="java.lang.Boolean" />
+    <composite:attribute name="resultado" type="java.lang.String" />
+    <composite:attribute name="importe" type="java.lang.String" />
+    <composite:attribute name="ganado" type="java.lang.Boolean" />
+    <composite:attribute name="retardo" type="java.lang.Integer" default="1000" />
+  </composite:interface>
+
+  <composite:implementation>
+    <h:form styleClass="apuesta-form bg-dark border border-warning rounded-4 p-4 w-100" style="max-width: 520px;">
+      <h:outputLabel for="cantidad" value="¿Cuánto quieres apostar?"
+                     styleClass="form-label fw-bold" />
+
+      <div class="input-group input-group-lg">
+        <h:inputText id="cantidad" value="#{cc.attrs.valor}"
+                     styleClass="form-control"
+                     pt:type="number" pt:min="1" pt:placeholder="#{cc.attrs.pendiente ? 'Esperando resultado…' : 'Ej. 50'}"
+                     required="true"
+                     requiredMessage="Escribe cuánto quieres apostar"
+                     converterMessage="La apuesta tiene que ser un número entero"
+                     validatorMessage="La apuesta debe estar entre 1 y #{cc.attrs.saldo} €">
+          <f:validateLongRange minimum="1" maximum="#{cc.attrs.saldo}" />
+        </h:inputText>
+        <span class="input-group-text">€</span>
+        <!-- commandLink y no commandButton: el tema de PrimeFaces pinta de blanco los input -->
+        <h:commandLink action="#{cc.attrs.accion}"
+                       styleClass="btn btn-warning fw-bold px-4 d-flex align-items-center">
+          <i class="bi bi-play-fill"></i>
+          Jugar
+        </h:commandLink>
+      </div>
+
+      <!-- Apuesta pendiente: tras el retardo aleatorio se pulsa el enlace oculto que aplica el saldo y muestra el resultado -->
+      <h:panelGroup layout="block" rendered="#{cc.attrs.pendiente}">
+        <h:commandLink action="#{cc.attrs.revelar}" immediate="true" styleClass="d-none revelar-apuesta" pt:data-retardo="#{cc.attrs.retardo}">
+          <span></span>
+        </h:commandLink>
+        <script>
+          (function () {
+            var enlace = document.querySelector("a.revelar-apuesta");
+            setTimeout(function () {
+              enlace.click();
+            }, Number(enlace.getAttribute("data-retardo")));
+          })();
+        </script>
+      </h:panelGroup>
+
+      <!-- Resultado ya revelado: tarjeta con titular, importe y saldo nuevo; el titular parpadea si gana -->
+      <h:panelGroup layout="block" rendered="#{not cc.attrs.pendiente and not empty cc.attrs.resultado}">
+        <div class="resultado-tarjeta #{cc.attrs.ganado ? 'resultado-tarjeta-ganada' : 'resultado-tarjeta-perdida'}">
+          <div class="resultado-titular #{cc.attrs.ganado ? 'resultado-parpadeo' : ''}">#{cc.attrs.resultado}</div>
+          <div class="resultado-importe">#{cc.attrs.importe}</div>
+          <div class="resultado-saldo">Tu saldo es ahora <h:outputText value="#{cc.attrs.saldo}"><f:convertNumber pattern="#,##0 €" locale="es" /></h:outputText></div>
+        </div>
+      </h:panelGroup>
+
+      <!-- Mensajes de error o de apuesta hecha (Growl de PrimeFaces) -->
+      <p:growl id="growl" showDetail="true" life="4000" />
+    </h:form>
+  </composite:implementation>
+
+</ui:component>

@@ -20,21 +20,21 @@ public class JuegoBean implements Serializable {
         juegos = new ArrayList<>();
         // imagen: ruta relativa a resources/imgs/
         juegos.add(new Juego("Ruleta Europea", "Ruleta clásica de un solo cero, con croupier en vivo.",
-                "juegos/ruleta.jpg", "/juegos/ruleta.html"));
+                "juegos/ruleta.jpg", "/ruleta.xhtml"));
         juegos.add(new Juego("Blackjack Royal", "Cartas, chips y dealer en vivo.",
-                "juegos/blackjack.jpg", "/juegos/blackjack.html"));
+                "juegos/blackjack.jpg", "/blackjack.xhtml"));
         juegos.add(new Juego("Póker Classic", "Mesa de póker con jugadores en vivo.",
-                "juegos/poker.jpg", "/juegos/poker.html"));
+                "juegos/poker.jpg", "/poker.xhtml"));
         juegos.add(new Juego("Pirots 3", "Tragaperras del viejo oeste con premios increíbles.",
-                "juegos/tragaperras.jpg", "/juegos/pirots.html"));
+                "juegos/tragaperras.jpg", "/pirots.xhtml"));
         juegos.add(new Juego("Ruleta MegaFire", "Ruleta potenciada con multiplicadores de hasta x500.",
-                "juegos/Ruleta_potenciada.jpg", "/juegos/juego.html"));
+                "juegos/Ruleta_potenciada.jpg", "/ruleta.xhtml"));
         juegos.add(new Juego("Blackjack Lightning", "Blackjack con cartas relámpago y pagos multiplicados.",
-                "juegos/blackjack_potenciado.jpg", "/juegos/juego.html"));
+                "juegos/blackjack_potenciado.jpg", "/blackjack.xhtml"));
         juegos.add(new Juego("Póker Mega Stack", "Torneos con fichas extra y botes garantizados.",
-                "juegos/Poker_Pot.jpg", "/juegos/juego.html"));
+                "juegos/Poker_Pot.jpg", "/poker.xhtml"));
         juegos.add(new Juego("Pirots 3 Turbo", "La tragaperras del oeste con giros extra y jackpot.",
-                "juegos/tragaperras_potenciada.jpg", "/juegos/juego.html"));
+                "juegos/tragaperras_potenciada.jpg", "/pirots.xhtml"));
 
         // PrimeFaces aplica la opcion cuyo breakpoint (max-width) cubre el ancho de la ventana:
         //   >= 1200px -> numVisible del carrusel (3)

@@ -1,0 +1,88 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:pt="jakarta.faces.passthrough"
+                xmlns:p="primefaces"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:comp="jakarta.faces.composite/components">
+
+  <ui:param name="enSala" value="#{true}" />
+
+  <ui:define name="title">Sala Blackjack | RoyalSpin</ui:define>
+
+  <ui:define name="content">
+    <!-- ====================================
+     CABECERA DE LA SALA
+===================================== -->
+    <h:form>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+
+          <span class="sala-saldo ms-auto me-3">
+            <i class="bi bi-wallet2"></i>
+            Saldo:
+            <h:outputText value="#{blackjackBean.saldo}" styleClass="ms-1">
+              <f:convertNumber pattern="#,##0 €" locale="es" />
+            </h:outputText>
+          </span>
+
+          <h:commandLink action="#{blackjackBean.salir}"
+                         styleClass="btn btn-outline-warning fw-bold">
+            <i class="bi bi-box-arrow-left"></i>
+            Salir de la sala
+          </h:commandLink>
+        </div>
+      </nav>
+    </h:form>
+
+    <!-- ====================================
+     MESA DE BLACKJACK
+===================================== -->
+    <main class="sala">
+      <h1 class="sala-titulo">#{blackjackBean.nombre}</h1>
+
+      <div class="mesa mesa-blackjack">
+        <!-- CRUPIER -->
+        <div class="zona">
+          <span class="zona-nombre">Crupier</span>
+          <div class="cartas">
+            <div class="carta">K♠</div>
+            <div class="carta oculta"></div>
+          </div>
+        </div>
+
+        <p class="mesa-lema">BLACKJACK PAGA 3 A 2 · EL CRUPIER SE PLANTA EN 17</p>
+
+        <!-- JUGADOR (tú) -->
+        <div class="zona">
+          <div class="cartas">
+            <div class="carta roja">A♥</div>
+            <div class="carta">Q♣</div>
+          </div>
+          <div class="casillas">
+            <div class="casilla"></div>
+            <div class="casilla">
+              <!-- Las fichas solo salen cuando hay dinero apostado -->
+              <h:panelGroup layout="block" styleClass="d-flex"
+                            rendered="#{blackjackBean.apuestaEnMesa gt 0}">
+                <div class="ficha ficha-roja"></div>
+                <div class="ficha ficha-azul"></div>
+              </h:panelGroup>
+            </div>
+            <div class="casilla"></div>
+          </div>
+          <span class="zona-nombre">
+            Tu sitio · En mesa: #{blackjackBean.apuestaEnMesa} €
+          </span>
+        </div>
+      </div>
+
+      <!-- ====================================
+       APUESTA
+  ===================================== -->
+      <comp:apuesta valor="#{blackjackBean.apuesta}" saldo="#{blackjackBean.saldo}" accion="#{blackjackBean.jugar}" resultado="#{blackjackBean.resultado}" ganado="#{blackjackBean.ganado}" retardo="#{blackjackBean.retardoMs}" pendiente="#{blackjackBean.pendiente}" revelar="#{blackjackBean.revelar}" importe="#{blackjackBean.importe}" />
+    </main>
+  </ui:define>
+
+</ui:composition>

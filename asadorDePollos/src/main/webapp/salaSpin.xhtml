@@ -1,0 +1,132 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:comp="jakarta.faces.composite/components">
+
+  <ui:param name="enSala" value="#{true}" />
+
+  <ui:define name="title">Sala Máquinas Spin | RoyalSpin</ui:define>
+
+  <ui:define name="content">
+    <!-- ====================================
+     CABECERA DE LA SALA
+===================================== -->
+    <h:form>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+
+          <span class="sala-saldo ms-auto me-3">
+            <i class="bi bi-wallet2"></i>
+            Saldo:
+            <h:outputText value="#{spinBean.saldo}" styleClass="ms-1">
+              <f:convertNumber pattern="#,##0 €" locale="es" />
+            </h:outputText>
+          </span>
+
+          <h:commandLink action="#{spinBean.salir}"
+                         styleClass="btn btn-outline-warning fw-bold">
+            <i class="bi bi-box-arrow-left"></i>
+            Salir de la sala
+          </h:commandLink>
+        </div>
+      </nav>
+    </h:form>
+
+    <!-- ====================================
+     MÁQUINA TRAGAPERRAS
+===================================== -->
+    <main class="sala">
+      <h1 class="sala-titulo">#{spinBean.nombre}</h1>
+
+      <div class="tragaperras">
+        <!-- CARTEL DE SE BUSCA -->
+        <div class="se-busca">
+          <div class="se-busca-titulo">SE BUSCA</div>
+          <div class="se-busca-foto"><i class="bi bi-person-fill"></i></div>
+          <div>RECOMPENSA</div>
+          <div class="se-busca-titulo">5.000 €</div>
+        </div>
+
+        <!-- MUEBLE DE MADERA -->
+        <div class="maquina">
+          <div class="maquina-frente">
+            <div class="estrella-sheriff"><i class="bi bi-star-fill"></i></div>
+
+            <div class="bombillas">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+            </div>
+
+            <div class="maquina-cartel">
+              PIROTS 3
+              <small>SALOON SLOTS</small>
+            </div>
+
+            <div class="jackpot">JACKPOT 12.500 €</div>
+
+            <!-- RODILLOS: 3 columnas de 3 cartas; la fila central es la de premio -->
+            <div class="linea-premio">
+              <i class="bi bi-caret-right-fill"></i>
+              <div class="rodillos">
+                <div class="rodillo">
+                  <div class="carta">🌵</div>
+                  <div class="carta oro premio"><i class="bi bi-star-fill"></i></div>
+                  <div class="carta verde"><i class="bi bi-currency-dollar"></i></div>
+                </div>
+                <div class="rodillo">
+                  <div class="carta roja">7</div>
+                  <div class="carta oro premio"><i class="bi bi-star-fill"></i></div>
+                  <div class="carta texto">BAR</div>
+                </div>
+                <div class="rodillo">
+                  <div class="carta oro"><i class="bi bi-coin"></i></div>
+                  <div class="carta oro premio"><i class="bi bi-star-fill"></i></div>
+                  <div class="carta">🌵</div>
+                </div>
+              </div>
+              <i class="bi bi-caret-left-fill"></i>
+            </div>
+
+            <p class="mesa-lema">3 ESTRELLAS DE SHERIFF PAGAN x50</p>
+
+            <div class="maquina-panel">
+              <span>Apuesta <b>1 €</b></span>
+              <span>Premio <b>50 €</b></span>
+            </div>
+
+            <div class="boton-girar">GIRAR</div>
+
+            <div class="bombillas">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <!-- BANDEJA DE MONEDAS -->
+          <div class="bandeja">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <!-- PALANCA Y CACTUS -->
+        <div class="palanca">
+          <div class="palanca-bola"></div>
+          <div class="palanca-barra"></div>
+          <div class="palanca-base"></div>
+          <div class="cactus">🌵</div>
+        </div>
+      </div>
+
+      <!-- JUGADOR (tú) -->
+      <div class="bote">
+        <div class="ficha ficha-negra"></div>
+        <div class="ficha ficha-verde"></div>
+        <span class="zona-nombre">Tu sitio</span>
+      </div>
+      <comp:apuesta valor="#{spinBean.apuesta}" saldo="#{spinBean.saldo}" accion="#{spinBean.jugar}" resultado="#{spinBean.resultado}" ganado="#{spinBean.ganado}" retardo="#{spinBean.retardoMs}" pendiente="#{spinBean.pendiente}" revelar="#{spinBean.revelar}" importe="#{spinBean.importe}" />
+    </main>
+  </ui:define>
+
+</ui:composition>

@@ -1,0 +1,90 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:comp="jakarta.faces.composite/components">
+
+  <ui:param name="enSala" value="#{true}" />
+
+  <ui:define name="title">Sala Póker | RoyalSpin</ui:define>
+
+  <ui:define name="content">
+    <!-- ====================================
+     CABECERA DE LA SALA
+===================================== -->
+    <h:form>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+
+          <span class="sala-saldo ms-auto me-3">
+            <i class="bi bi-wallet2"></i>
+            Saldo:
+            <h:outputText value="#{pokerBean.saldo}" styleClass="ms-1">
+              <f:convertNumber pattern="#,##0 €" locale="es" />
+            </h:outputText>
+          </span>
+
+          <h:commandLink action="#{pokerBean.salir}"
+                         styleClass="btn btn-outline-warning fw-bold">
+            <i class="bi bi-box-arrow-left"></i>
+            Salir de la sala
+          </h:commandLink>
+        </div>
+      </nav>
+    </h:form>
+
+    <!-- ====================================
+     MESA DE PÓKER
+===================================== -->
+    <main class="sala">
+      <h1 class="sala-titulo">#{pokerBean.nombre}</h1>
+
+      <div class="mesa mesa-poker">
+        <!-- RIVALES -->
+        <div class="rivales">
+          <div class="rival">
+            <img class="rounded-circle" src="https://i.pravatar.cc/80?img=12" alt="Rival" />
+            <span>Marta · 850 €</span>
+          </div>
+          <div class="rival">
+            <img class="rounded-circle" src="https://i.pravatar.cc/80?img=33" alt="Rival" />
+            <span>Luis · 1.240 €</span>
+          </div>
+          <div class="rival">
+            <img class="rounded-circle" src="https://i.pravatar.cc/80?img=47" alt="Rival" />
+            <span>Elena · 610 €</span>
+          </div>
+        </div>
+
+        <!-- CARTAS COMUNES Y BOTE -->
+        <div class="zona">
+          <div class="cartas">
+            <div class="carta roja">10♦</div>
+            <div class="carta">J♠</div>
+            <div class="carta roja">Q♥</div>
+            <div class="carta oculta"></div>
+            <div class="carta oculta"></div>
+          </div>
+          <div class="bote">
+            <div class="ficha ficha-negra"></div>
+            <div class="ficha ficha-verde"></div>
+            <div class="ficha ficha-roja"></div>
+            <span>Bote: 320 €</span>
+          </div>
+        </div>
+
+        <!-- JUGADOR (tú) -->
+        <div class="zona">
+          <div class="cartas">
+            <div class="carta">A♠</div>
+            <div class="carta roja">K♥</div>
+          </div>
+          <span class="zona-nombre">Tu sitio</span>
+        </div>
+      </div>
+      <comp:apuesta valor="#{pokerBean.apuesta}" saldo="#{pokerBean.saldo}" accion="#{pokerBean.jugar}" resultado="#{pokerBean.resultado}" ganado="#{pokerBean.ganado}" retardo="#{pokerBean.retardoMs}" pendiente="#{pokerBean.pendiente}" revelar="#{pokerBean.revelar}" importe="#{pokerBean.importe}" />
+    </main>
+  </ui:define>
+
+</ui:composition>
