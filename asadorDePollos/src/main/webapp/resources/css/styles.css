@@ -435,3 +435,653 @@ body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator
     width: 1.25rem;
   }
 }
+
+
+/* ==============================
+   Copiado de casinoJakarta: salas de juego (blackjack, poker, ruleta, pirots)
+   ============================== */
+/* =========================
+           SALAS DE JUEGO
+========================= */
+
+.sala {
+  min-height: calc(100vh - 70px);
+  padding: 30px 16px 50px;
+  background-image: url("#{resource['imgs:fondo_juegos.jpg']}");
+  background-size: cover;
+  background-position: center;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.sala-titulo {
+  color: #ffc107;
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.sala-saldo {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+/* Mesa: tapete verde con borde de madera */
+
+.mesa {
+  width: min(1000px, 100%);
+  background: radial-gradient(ellipse at center, #1f8a43 0%, #0b4a22 80%);
+  border: 18px solid #5a3015;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(0, 0, 0, 0.6);
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.zona {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.zona-nombre {
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mesa-lema {
+  margin: 0;
+  color: #ffc107;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+/* Cartas */
+
+.cartas {
+  display: flex;
+  gap: 10px;
+}
+
+.carta {
+  width: 70px;
+  height: 100px;
+  background: white;
+  color: #111;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.carta.roja {
+  color: #c8102e;
+}
+
+/* Carta boca abajo */
+.carta.oculta {
+  background: repeating-linear-gradient(45deg, #8b0000 0 6px, #a8142a 6px 12px);
+  border: 4px solid white;
+}
+
+/* Fichas y casillas de apuesta */
+
+.ficha {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 5px dashed white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+.ficha + .ficha {
+  margin-left: -20px; /* fichas apiladas */
+}
+
+.ficha-roja { background: #c8102e; }
+.ficha-azul { background: #1d4ed8; }
+.ficha-negra { background: #111; }
+.ficha-verde { background: #15803d; }
+
+.casillas {
+  display: flex;
+  gap: 30px;
+}
+
+.casilla {
+  width: 80px;
+  height: 80px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bote {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.bote span {
+  margin-left: 10px;
+}
+
+/* Blackjack: mesa en media luna */
+
+.mesa-blackjack {
+  aspect-ratio: 2 / 1;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  border-top: 30px solid #5a3015;
+}
+
+/* Póker: mesa ovalada */
+
+.mesa-poker {
+  border-radius: 200px;
+}
+
+.rivales {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.rival {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.rival img {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #ffc107;
+}
+
+/* Ruleta: rueda que gira y tapete de números */
+
+.mesa-ruleta {
+  border-radius: 30px;
+}
+
+.rueda {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 14px solid #5a3015;
+  /* 37 casillas: el 0 en verde y el resto alternando rojo y negro */
+  background:
+    conic-gradient(#15803d 0 9.73deg, transparent 0),
+    repeating-conic-gradient(from 9.73deg, #c8102e 0 9.73deg, #111 9.73deg 19.46deg);
+  animation: girar 8s linear infinite;
+}
+
+.rueda-centro {
+  position: absolute;
+  inset: 32%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffc107 0%, #8a5a00 100%);
+}
+
+.bola {
+  position: absolute;
+  top: 10px;
+  left: calc(50% - 8px);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tapete {
+  display: grid;
+  grid-template-rows: repeat(3, 44px);
+  grid-auto-flow: column; /* el bean da los números ya ordenados por columnas */
+  grid-auto-columns: 44px;
+  border: 2px solid white;
+}
+
+.numero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  font-weight: bold;
+}
+
+.numero.rojo { background: #c8102e; }
+.numero.negro { background: #111; }
+
+.numero.cero {
+  grid-row: span 3;
+  background: #15803d;
+}
+
+/* Máquinas Spin: tragaperras del viejo oeste */
+
+.tragaperras {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* Mueble de madera con el arco arriba */
+.maquina {
+  width: min(440px, 100%);
+  padding: 14px;
+  border-radius: 220px 220px 24px 24px;
+  background: #5a3015;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+/* Frente de tapete verde, como las otras mesas */
+.maquina-frente {
+  padding: 20px;
+  border: 2px solid #ffc107;
+  border-radius: 210px 210px 14px 14px;
+  background: radial-gradient(ellipse at center, #1f8a43 0%, #0b4a22 80%);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.estrella-sheriff {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid #fff3c4;
+  background: radial-gradient(circle, #ffd54f 0%, #b8860b 100%);
+  color: #5a3015;
+  font-size: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bombillas que se encienden por turnos */
+.bombillas {
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bombillas span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #ffc107;
+  box-shadow: 0 0 8px #ffc107;
+  animation: parpadeo 1s infinite alternate;
+}
+
+.bombillas span:nth-child(even) {
+  animation-delay: 0.5s;
+}
+
+@keyframes parpadeo {
+  to {
+    background: #fff3c4;
+    box-shadow: none;
+  }
+}
+
+/* Cartel de madera del saloon */
+.maquina-cartel {
+  padding: 8px 24px;
+  border: 4px solid #3d1f0b;
+  border-radius: 4px;
+  background: #7a4420;
+  color: #ffc107;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-align: center;
+  text-shadow: 2px 2px 0 #3d1f0b;
+}
+
+.maquina-cartel small {
+  display: block;
+  color: #fff3c4;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-shadow: none;
+}
+
+.jackpot {
+  padding: 4px 16px;
+  border-radius: 6px;
+  background: #111;
+  color: #ffc107;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* Rodillos hechos con las mismas cartas de las otras mesas */
+.linea-premio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffc107;
+}
+
+.rodillos {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border: 2px solid #ffc107;
+  border-radius: 10px;
+  background: #0b4a22;
+}
+
+.rodillo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rodillo .carta {
+  width: 64px;
+  height: 84px;
+  font-size: 28px;
+}
+
+.rodillo .carta.texto {
+  font-size: 18px;
+}
+
+.carta.oro { color: #b8860b; }
+.carta.verde { color: #15803d; }
+
+/* Fila central: la de premio */
+.carta.premio {
+  outline: 3px solid #ffc107;
+}
+
+.maquina-panel {
+  display: flex;
+  gap: 10px;
+}
+
+.maquina-panel span {
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: #111;
+  font-size: 14px;
+}
+
+.maquina-panel b {
+  color: #ffc107;
+}
+
+.boton-girar {
+  padding: 8px 36px;
+  border-radius: 999px;
+  background: #ffc107;
+  color: #412402;
+  font-weight: bold;
+  letter-spacing: 3px;
+  box-shadow: 0 4px 0 #b8860b;
+}
+
+.bandeja {
+  width: 70%;
+  height: 32px;
+  margin: 12px auto 0;
+  border: 2px solid #ffc107;
+  border-radius: 4px 4px 16px 16px;
+  background: #111;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.bandeja span {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px dashed #fff;
+  background: #ffc107;
+}
+
+/* Palanca a la derecha y cactus al pie */
+.palanca {
+  margin-top: 170px;
+  margin-left: -34px; /* pegada al mueble */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.palanca-bola {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: radial-gradient(circle at 35% 35%, #ff4d5e, #8b0000);
+}
+
+.palanca-barra {
+  width: 9px;
+  height: 130px;
+  background: linear-gradient(90deg, #8a8d92, #e5e7ea, #8a8d92);
+}
+
+.palanca-base {
+  width: 24px;
+  height: 34px;
+  border-radius: 0 6px 6px 0;
+  background: #5a3015;
+}
+
+.cactus {
+  margin-top: 150px;
+  font-size: 44px;
+}
+
+/* Cartel de "Se busca" clavado a la izquierda */
+.se-busca {
+  width: 130px;
+  margin-top: 130px;
+  padding: 12px 8px;
+  border-radius: 4px;
+  background: #e9d8a6;
+  color: #5a3015;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  text-align: center;
+  transform: rotate(-4deg);
+}
+
+.se-busca-titulo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.se-busca-foto {
+  width: 70px;
+  height: 70px;
+  margin: 8px auto;
+  border: 2px solid #5a3015;
+  font-size: 44px;
+  line-height: 66px;
+}
+
+@media (max-width: 768px) {
+  .mesa {
+    border-width: 10px;
+    padding: 20px 10px;
+  }
+
+  .carta {
+    width: 48px;
+    height: 70px;
+    font-size: 18px;
+  }
+
+  .mesa-blackjack {
+    aspect-ratio: auto;
+    border-radius: 0 0 40% 40% / 0 0 30% 30%;
+  }
+
+  .tapete {
+    grid-template-rows: repeat(3, 22px);
+    grid-auto-columns: 22px;
+    font-size: 12px;
+  }
+
+  .rueda {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* =========================
+           INDEX: TARJETAS DE JUEGO
+========================= */
+
+.juego-tarjeta {
+  min-height: 0;
+  height: 100%;
+}
+
+.juego-tarjeta .game-area {
+  height: 200px;
+  font-size: 36px;
+}
+
+.juego-tarjeta h2 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+/* En móvil solo cabe la máquina */
+@media (max-width: 768px) {
+  .se-busca,
+  .palanca {
+    display: none;
+  }
+}
+
+/* Casillas del tapete (ahora son <a>, no <div>) */
+.tapete .numero {
+  color: white;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.tapete .numero:hover {
+  filter: brightness(1.3);
+}
+
+/* Fichas: Bootstrap no tiene utilidades de tamaño fijo en px/rem */
+.ficha-btn {
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s;
+}
+.ficha-btn.ficha-activa {
+  transform: scale(1.2);
+}
+
+/* Bootstrap no incluye border-dashed */
+.border-dashed {
+  border-style: dashed !important;
+}
+
+
+/* Abajo a la derecha */
+.ui-growl {
+  top: auto !important;
+  bottom: 20px;
+  right: 20px;
+}
+/* Juegos y leaderboard: sin la foto de fondo de la plantilla, para que los paneles
+   no queden dentro de otra ventana */
+.home-container:has(.featured-game),
+.home-container:has(.table-transparente) {
+  background-image: none;
+}
+
+/* Paneles de ganadores de los juegos: contenido centrado, filas con aire y el importe a la derecha */
+.big-win {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.big-win .winner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border: 1px solid #ffbf00;
+  border-radius: 8px;
+}
+
+.big-win .winner-position {
+  width: auto;
+  color: #bbb;
+}
+
+.big-win .winner-name {
+  flex: 1;
+  text-align: left;
+}
+
+.big-win .winner-amount {
+  margin-left: auto !important;
+  white-space: nowrap;
+}
+
+/* Salas de juego: la sala pone su propio fondo, asi que no se dibuja otro marco de la plantilla alrededor */
+.home-container:has(.sala) {
+  background-image: none;
+  padding: 0;
+  min-height: 0;
+}
