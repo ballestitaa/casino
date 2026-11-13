@@ -2,7 +2,10 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:f="jakarta.faces.core"
-                xmlns:ui="jakarta.faces.facelets">
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:comp="jakarta.faces.composite/components">
+
+  <ui:param name="enSala" value="#{true}" />
 
   <ui:define name="title">Sala Máquinas Spin | RoyalSpin</ui:define>
 
@@ -122,6 +125,7 @@
         <div class="ficha ficha-verde"></div>
         <span class="zona-nombre">Tu sitio</span>
       </div>
+      <comp:apuesta valor="#{spinBean.apuesta}" saldo="#{spinBean.saldo}" accion="#{spinBean.jugar}" resultado="#{spinBean.resultado}" ganado="#{spinBean.ganado}" retardo="#{spinBean.retardoMs}" pendiente="#{spinBean.pendiente}" revelar="#{spinBean.revelar}" importe="#{spinBean.importe}" />
     </main>
   </ui:define>
 

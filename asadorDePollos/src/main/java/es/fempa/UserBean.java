@@ -15,7 +15,7 @@ public class UserBean implements Serializable {
     private String usuario;
     private String nombre;
     private boolean loggedIn;
-    private float saldo;
+    private float saldo = 100.0f;
     private String email;
     private String rol;
     // Mensaje que se muestra una sola vez en home tras el login (sustituye al Flash)

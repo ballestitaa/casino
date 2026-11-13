@@ -2,7 +2,10 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:f="jakarta.faces.core"
-                xmlns:ui="jakarta.faces.facelets">
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:comp="jakarta.faces.composite/components">
+
+  <ui:param name="enSala" value="#{true}" />
 
   <ui:define name="title">Sala Póker | RoyalSpin</ui:define>
 
@@ -80,6 +83,7 @@
           <span class="zona-nombre">Tu sitio</span>
         </div>
       </div>
+      <comp:apuesta valor="#{pokerBean.apuesta}" saldo="#{pokerBean.saldo}" accion="#{pokerBean.jugar}" resultado="#{pokerBean.resultado}" ganado="#{pokerBean.ganado}" retardo="#{pokerBean.retardoMs}" pendiente="#{pokerBean.pendiente}" revelar="#{pokerBean.revelar}" importe="#{pokerBean.importe}" />
     </main>
   </ui:define>
 

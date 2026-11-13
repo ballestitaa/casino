@@ -1,8 +1,11 @@
 package es.fempa;
 
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,7 +24,8 @@ public class RuletaBean implements Serializable {
     private final Random random = new Random();
 
     private String nombre = "Ruleta en Vivo";
-    private int saldo = 1000;
+    @Inject
+    private UserBean userBean;
 
     // Ficha elegida actualmente (50, 100, 500 o 1000)
     private int fichaSeleccionada = 50;
@@ -43,7 +47,7 @@ public class RuletaBean implements Serializable {
     }
 
     public int getSaldo() {
-        return saldo;
+        return (int) userBean.getSaldo();
     }
 
     public int getFichaSeleccionada() {
@@ -102,19 +106,19 @@ public class RuletaBean implements Serializable {
 
     // Clic en una casilla: coloca la ficha seleccionada
     public void apostar(String casilla) {
-        if (fichaSeleccionada > saldo) {
+        if (fichaSeleccionada > (int) userBean.getSaldo()) {
             mensaje = "Saldo insuficiente para esa ficha";
             ultimaGanada = false;
             return;
         }
         apuestas.merge(casilla, fichaSeleccionada, Integer::sum);
-        saldo -= fichaSeleccionada;
+        userBean.setSaldo(userBean.getSaldo() - fichaSeleccionada);
         mensaje = "";
     }
 
     // Clear: devuelve las fichas al saldo
     public void limpiar() {
-        saldo += getTotalApostado();
+        userBean.setSaldo(userBean.getSaldo() + getTotalApostado());
         apuestas.clear();
         mensaje = "";
     }
@@ -127,14 +131,14 @@ public class RuletaBean implements Serializable {
             return;
         }
         int total = ultimaApuesta.values().stream().mapToInt(Integer::intValue).sum();
-        if (total > saldo + getTotalApostado()) {
+        if (total > (int) userBean.getSaldo() + getTotalApostado()) {
             mensaje = "Saldo insuficiente para repetir la apuesta";
             ultimaGanada = false;
             return;
         }
         limpiar();
         apuestas.putAll(ultimaApuesta);
-        saldo -= total;
+        userBean.setSaldo(userBean.getSaldo() - total);
     }
 
     // Spin: sortea el número, paga y deja la mesa limpia
@@ -156,7 +160,7 @@ public class RuletaBean implements Serializable {
             }
         }
         int apostado = getTotalApostado();
-        saldo += premio;
+        userBean.setSaldo(userBean.getSaldo() + premio);
         ultimaApuesta = new LinkedHashMap<>(apuestas);
         apuestas.clear();
 
@@ -170,11 +174,86 @@ public class RuletaBean implements Serializable {
 
     // Botón "Jugar" de ruleta.xhtml: entra en la sala
     public String entrar() {
+        resultado = "";
         return "salaRuleta?faces-redirect=true";
     }
 
     // Botón "Salir de la sala": vuelve a la página del juego
     public String salir() {
         return "ruleta?faces-redirect=true";
+    }
+
+    // Campo de apuesta del componente comun (comp:apuesta)
+    private Integer apuesta;
+    // Texto del resultado de la ultima apuesta, se muestra debajo del boton Jugar
+    private String resultado = "";
+    private String importe = "";
+
+    public String getImporte() {
+        return importe;
+    }
+    // Apuesta pendiente de revelar (el saldo cambia cuando se muestra el resultado)
+    private int apuestaJugada;
+    private boolean pendiente;
+
+    public boolean isPendiente() {
+        return pendiente;
+    }
+    // Si la ultima apuesta gano y cuantos milisegundos tarda en mostrarse (1 a 5 s)
+    private boolean ganado;
+    private int retardoMs;
+
+    public boolean isGanado() {
+        return ganado;
+    }
+
+    public int getRetardoMs() {
+        return retardoMs;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public Integer getApuesta() {
+        return apuesta;
+    }
+
+    public void setApuesta(Integer apuesta) {
+        this.apuesta = apuesta;
+    }
+
+
+    // Boton "Jugar" del componente: resuelve la apuesta al azar y actualiza el saldo
+
+    // Apostar: el resultado queda decidido, pero el saldo y el mensaje esperan a revelar()
+    public String jugar() {
+        apuestaJugada = apuesta;
+        ganado = Math.random() < 0.5;
+        retardoMs = (int) (1000 + Math.random() * 4001);
+        pendiente = true;
+        resultado = "";
+        importe = "";
+        apuesta = null;
+        return "salaRuleta?faces-redirect=true";
+    }
+
+    // Se llama al terminar el retardo: aplica el saldo y muestra el mensaje
+    public String revelar() {
+        if (!pendiente) {
+            return "salaRuleta?faces-redirect=true";
+        }
+        int ap = apuestaJugada;
+        if (ganado) {
+            userBean.setSaldo(userBean.getSaldo() + ap);
+            resultado = "¡Has ganado!";
+            importe = "+" + ap + " €";
+        } else {
+            userBean.setSaldo(userBean.getSaldo() - ap);
+            resultado = "Has perdido";
+            importe = "−" + ap + " €";
+        }
+        pendiente = false;
+        return "salaRuleta?faces-redirect=true";
     }
 }

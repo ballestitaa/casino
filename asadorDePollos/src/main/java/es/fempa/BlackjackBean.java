@@ -3,6 +3,7 @@ package es.fempa;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 
@@ -11,8 +12,38 @@ import java.io.Serializable;
 public class BlackjackBean implements Serializable {
 
     private String nombre = "Blackjack en Vivo";
-    private int saldo = 1000;
+    @Inject
+    private UserBean userBean;
     private Integer apuesta;        // lo que escribe el jugador en el campo
+    // Texto del resultado de la ultima apuesta, se muestra debajo del boton Jugar
+    private String resultado = "";
+    private String importe = "";
+
+    public String getImporte() {
+        return importe;
+    }
+    // Apuesta pendiente de revelar (el saldo cambia cuando se muestra el resultado)
+    private int apuestaJugada;
+    private boolean pendiente;
+
+    public boolean isPendiente() {
+        return pendiente;
+    }
+    // Si la ultima apuesta gano y cuantos milisegundos tarda en mostrarse (1 a 5 s)
+    private boolean ganado;
+    private int retardoMs;
+
+    public boolean isGanado() {
+        return ganado;
+    }
+
+    public int getRetardoMs() {
+        return retardoMs;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
     private int apuestaEnMesa = 0;  // lo que ya ha apostado y está en la mesa
 
 
@@ -22,7 +53,7 @@ public class BlackjackBean implements Serializable {
     }
 
     public int getSaldo() {
-        return saldo;
+        return (int) userBean.getSaldo();
     }
 
     public int getApuestaEnMesa() {
@@ -38,37 +69,50 @@ public class BlackjackBean implements Serializable {
         this.apuesta = apuesta;
     }
 
-    // Botón "Jugar" de la sala: pone la apuesta en la mesa y la resta del saldo
-    public String jugar() {
-        FacesContext contexto = FacesContext.getCurrentInstance();
 
-        // La página ya valida, pero se vuelve a comprobar aquí por seguridad
-        /*if (apuesta == null || apuesta <= 0 || apuesta > saldo) {
-            contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "La apuesta debe estar entre 1 y " + saldo + " €", null));
-            return null; // se queda en la página mostrando el error
-        }*/
-
-        saldo -= apuesta;
-        apuestaEnMesa += apuesta;
-        contexto.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                "Apuesta realizada", "Has apostado " + apuesta + " €. ¡Suerte!"));
-        apuesta = null;  // vacía el campo para la siguiente apuesta
-        // El mensaje sobrevive a la redirección
-        contexto.getExternalContext().getFlash().setKeepMessages(true);
-
-        // Post/Redirect/Get: el navegador vuelve a cargar la sala con un GET,
-        // así que refrescar (F5) ya no repite la apuesta
-        return "salaBlackjack?faces-redirect=true";
-    }
 
     // Botón "Jugar" de blackjack.xhtml: entra en la sala
     public String entrar() {
+        resultado = "";
         return "salaBlackjack?faces-redirect=true";
     }
 
     // Botón "Salir de la sala": vuelve a la página del juego
     public String salir() {
         return "blackjack?faces-redirect=true";
+    }
+    // Boton "Jugar" de la sala: pone la apuesta en la mesa y la resuelve al azar
+
+    // Apostar: el resultado queda decidido, pero el saldo y el mensaje esperan a revelar()
+    public String jugar() {
+        apuestaJugada = apuesta;
+        ganado = Math.random() < 0.5;
+        retardoMs = (int) (1000 + Math.random() * 4001);
+        pendiente = true;
+        resultado = "";
+        importe = "";
+        apuesta = null;
+        apuestaEnMesa = apuestaJugada;
+        return "salaBlackjack?faces-redirect=true";
+    }
+
+    // Se llama al terminar el retardo: aplica el saldo y muestra el mensaje
+    public String revelar() {
+        if (!pendiente) {
+            return "salaBlackjack?faces-redirect=true";
+        }
+        int ap = apuestaJugada;
+        if (ganado) {
+            userBean.setSaldo(userBean.getSaldo() + ap);
+            resultado = "¡Has ganado!";
+            importe = "+" + ap + " €";
+        } else {
+            userBean.setSaldo(userBean.getSaldo() - ap);
+            resultado = "Has perdido";
+            importe = "−" + ap + " €";
+        }
+        apuestaEnMesa = 0;
+        pendiente = false;
+        return "salaBlackjack?faces-redirect=true";
     }
 }

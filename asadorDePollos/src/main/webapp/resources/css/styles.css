@@ -1047,41 +1047,177 @@ body .carrusel-juegos.ui-carousel .ui-carousel-indicators .ui-carousel-indicator
   background-image: none;
 }
 
-/* Paneles de ganadores de los juegos: contenido centrado, filas con aire y el importe a la derecha */
+/* Paneles de ganadores de los juegos: sin partir nombres ni importes, para que quepan en la columna estrecha */
 .big-win {
   display: flex;
   flex-direction: column;
   text-align: center;
+  padding: 14px;
+}
+
+.big-win .big-win-title {
+  font-size: 18px;
+  margin-bottom: 14px;
 }
 
 .big-win .winner {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  margin-bottom: 10px;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
   border: 1px solid #ffbf00;
   border-radius: 8px;
 }
 
 .big-win .winner-position {
   width: auto;
+  flex: 0 0 auto;
   color: #bbb;
+}
+
+.big-win .winner-avatar {
+  flex: 0 0 auto;
+  margin-right: 0;
 }
 
 .big-win .winner-name {
   flex: 1;
+  min-width: 0;
   text-align: left;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .big-win .winner-amount {
+  flex: 0 0 auto;
   margin-left: auto !important;
+  font-size: 14px;
   white-space: nowrap;
+}
+
+/* Salas: la barra superior y la mesa ocupan todo el ancho, sin margen ni esquinas de otro marco */
+.home-container:has(.sala) {
+  margin: 0 !important;
+  max-width: none;
+}
+
+.home-container:has(.sala) .navbar {
+  margin: 0;
+  border-radius: 0;
 }
 
 /* Salas de juego: la sala pone su propio fondo, asi que no se dibuja otro marco de la plantilla alrededor */
 .home-container:has(.sala) {
-  background-image: none;
-  padding: 0;
+  background-image: none !important;
+  padding: 0 !important;
   min-height: 0;
+}
+
+/* Componente de apuesta: campo oscuro con borde dorado en lugar del blanco del tema de PrimeFaces */
+body .apuesta-form input.form-control {
+  background: #2b3035;
+  color: #fff;
+  border: 1px solid rgba(255, 193, 7, 0.45);
+  color-scheme: dark;
+}
+
+body .apuesta-form input.form-control::placeholder {
+  color: #8a8f94;
+  opacity: 1;
+}
+
+body .apuesta-form input.form-control:focus {
+  background: #2b3035;
+  color: #fff;
+  border-color: #ffc107;
+  box-shadow: none;
+}
+
+body .apuesta-form .input-group-text {
+  background: #2b3035;
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.45);
+  font-weight: 500;
+}
+
+/* Resultado de la apuesta: si gana, el mensaje parpadea */
+.resultado-parpadeo {
+  animation: parpadeo-resultado 0.6s steps(2, start) infinite;
+}
+
+@keyframes parpadeo-resultado {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* Resultado de la apuesta: tarjeta con titular grande, importe y saldo nuevo */
+.resultado-tarjeta {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 2px solid;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.resultado-tarjeta-ganada {
+  border-color: #ffc107;
+}
+
+.resultado-tarjeta-perdida {
+  border-color: #e24b4a;
+}
+
+.resultado-titular {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.resultado-tarjeta-ganada .resultado-titular {
+  color: #ffc107;
+}
+
+.resultado-tarjeta-perdida .resultado-titular {
+  color: #ff7b7b;
+}
+
+.resultado-importe {
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+.resultado-saldo {
+  font-size: 15px;
+  color: #aaa;
+  margin-top: 8px;
+}
+
+/* Componente de apuesta centrado bajo la mesa o la maquina, en todas las salas */
+body .apuesta-form {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  align-self: center;
+}
+
+/* Maquina Spin: queda centrada sola; el cartel y la palanca van a los lados sin empujarla */
+.tragaperras {
+  position: relative;
+  width: min(440px, 100%);
+}
+
+.tragaperras .se-busca {
+  position: absolute;
+  right: 100%;
+  top: 130px;
+  margin: 0 20px 0 0;
+}
+
+.tragaperras .palanca {
+  position: absolute;
+  left: calc(100% - 14px);
+  top: 170px;
+  margin: 0;
 }

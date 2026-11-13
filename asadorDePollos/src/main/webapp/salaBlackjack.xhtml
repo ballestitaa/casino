@@ -4,7 +4,10 @@
                 xmlns:f="jakarta.faces.core"
                 xmlns:pt="jakarta.faces.passthrough"
                 xmlns:p="primefaces"
-                xmlns:ui="jakarta.faces.facelets">
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:comp="jakarta.faces.composite/components">
+
+  <ui:param name="enSala" value="#{true}" />
 
   <ui:define name="title">Sala Blackjack | RoyalSpin</ui:define>
 
@@ -78,33 +81,7 @@
       <!-- ====================================
        APUESTA
   ===================================== -->
-      <h:form styleClass="bg-dark border border-warning rounded-4 p-4 w-100"
-              style="max-width: 520px;">
-        <h:outputLabel for="cantidad" value="¿Cuánto quieres apostar?"
-                       styleClass="form-label fw-bold" />
-
-        <div class="input-group input-group-lg">
-          <h:inputText id="cantidad" value="#{blackjackBean.apuesta}"
-                       styleClass="form-control"
-                       pt:type="number" pt:min="1" pt:placeholder="Ej. 50"
-                       required="true"
-                       requiredMessage="Escribe cuánto quieres apostar"
-                       converterMessage="La apuesta tiene que ser un número entero"
-                       validatorMessage="La apuesta debe estar entre 1 y #{blackjackBean.saldo} €">
-            <f:validateLongRange minimum="1" maximum="#{blackjackBean.saldo}" />
-          </h:inputText>
-          <span class="input-group-text">€</span>
-          <!-- commandLink y no commandButton: el tema de PrimeFaces pinta de blanco los input -->
-          <h:commandLink action="#{blackjackBean.jugar}"
-                         styleClass="btn btn-warning fw-bold px-4 d-flex align-items-center">
-            <i class="bi bi-play-fill"></i>
-            Jugar
-          </h:commandLink>
-        </div>
-
-        <!-- Mensajes de error o de apuesta hecha (Growl de PrimeFaces) -->
-        <p:growl id="growl" showDetail="true" life="4000" />
-      </h:form>
+      <comp:apuesta valor="#{blackjackBean.apuesta}" saldo="#{blackjackBean.saldo}" accion="#{blackjackBean.jugar}" resultado="#{blackjackBean.resultado}" ganado="#{blackjackBean.ganado}" retardo="#{blackjackBean.retardoMs}" pendiente="#{blackjackBean.pendiente}" revelar="#{blackjackBean.revelar}" importe="#{blackjackBean.importe}" />
     </main>
   </ui:define>
 

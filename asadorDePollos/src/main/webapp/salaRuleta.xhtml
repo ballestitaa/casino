@@ -2,7 +2,10 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:f="jakarta.faces.core"
-                xmlns:ui="jakarta.faces.facelets">
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:comp="jakarta.faces.composite/components">
+
+  <ui:param name="enSala" value="#{true}" />
 
   <ui:define name="title">Sala Ruleta | RoyalSpin</ui:define>
 
@@ -129,6 +132,7 @@
           </h:panelGroup>
         </div>
       </h:form>
+      <comp:apuesta valor="#{ruletaBean.apuesta}" saldo="#{ruletaBean.saldo}" accion="#{ruletaBean.jugar}" resultado="#{ruletaBean.resultado}" ganado="#{ruletaBean.ganado}" retardo="#{ruletaBean.retardoMs}" pendiente="#{ruletaBean.pendiente}" revelar="#{ruletaBean.revelar}" importe="#{ruletaBean.importe}" />
     </main>
   </ui:define>
 
