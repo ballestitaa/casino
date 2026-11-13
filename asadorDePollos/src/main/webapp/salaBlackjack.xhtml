@@ -1,0 +1,111 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:pt="jakarta.faces.passthrough"
+                xmlns:p="primefaces"
+                xmlns:ui="jakarta.faces.facelets">
+
+  <ui:define name="title">Sala Blackjack | RoyalSpin</ui:define>
+
+  <ui:define name="content">
+    <!-- ====================================
+     CABECERA DE LA SALA
+===================================== -->
+    <h:form>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+
+          <span class="sala-saldo ms-auto me-3">
+            <i class="bi bi-wallet2"></i>
+            Saldo:
+            <h:outputText value="#{blackjackBean.saldo}" styleClass="ms-1">
+              <f:convertNumber pattern="#,##0 €" locale="es" />
+            </h:outputText>
+          </span>
+
+          <h:commandLink action="#{blackjackBean.salir}"
+                         styleClass="btn btn-outline-warning fw-bold">
+            <i class="bi bi-box-arrow-left"></i>
+            Salir de la sala
+          </h:commandLink>
+        </div>
+      </nav>
+    </h:form>
+
+    <!-- ====================================
+     MESA DE BLACKJACK
+===================================== -->
+    <main class="sala">
+      <h1 class="sala-titulo">#{blackjackBean.nombre}</h1>
+
+      <div class="mesa mesa-blackjack">
+        <!-- CRUPIER -->
+        <div class="zona">
+          <span class="zona-nombre">Crupier</span>
+          <div class="cartas">
+            <div class="carta">K♠</div>
+            <div class="carta oculta"></div>
+          </div>
+        </div>
+
+        <p class="mesa-lema">BLACKJACK PAGA 3 A 2 · EL CRUPIER SE PLANTA EN 17</p>
+
+        <!-- JUGADOR (tú) -->
+        <div class="zona">
+          <div class="cartas">
+            <div class="carta roja">A♥</div>
+            <div class="carta">Q♣</div>
+          </div>
+          <div class="casillas">
+            <div class="casilla"></div>
+            <div class="casilla">
+              <!-- Las fichas solo salen cuando hay dinero apostado -->
+              <h:panelGroup layout="block" styleClass="d-flex"
+                            rendered="#{blackjackBean.apuestaEnMesa gt 0}">
+                <div class="ficha ficha-roja"></div>
+                <div class="ficha ficha-azul"></div>
+              </h:panelGroup>
+            </div>
+            <div class="casilla"></div>
+          </div>
+          <span class="zona-nombre">
+            Tu sitio · En mesa: #{blackjackBean.apuestaEnMesa} €
+          </span>
+        </div>
+      </div>
+
+      <!-- ====================================
+       APUESTA
+  ===================================== -->
+      <h:form styleClass="bg-dark border border-warning rounded-4 p-4 w-100"
+              style="max-width: 520px;">
+        <h:outputLabel for="cantidad" value="¿Cuánto quieres apostar?"
+                       styleClass="form-label fw-bold" />
+
+        <div class="input-group input-group-lg">
+          <h:inputText id="cantidad" value="#{blackjackBean.apuesta}"
+                       styleClass="form-control"
+                       pt:type="number" pt:min="1" pt:placeholder="Ej. 50"
+                       required="true"
+                       requiredMessage="Escribe cuánto quieres apostar"
+                       converterMessage="La apuesta tiene que ser un número entero"
+                       validatorMessage="La apuesta debe estar entre 1 y #{blackjackBean.saldo} €">
+            <f:validateLongRange minimum="1" maximum="#{blackjackBean.saldo}" />
+          </h:inputText>
+          <span class="input-group-text">€</span>
+          <!-- commandLink y no commandButton: el tema de PrimeFaces pinta de blanco los input -->
+          <h:commandLink action="#{blackjackBean.jugar}"
+                         styleClass="btn btn-warning fw-bold px-4 d-flex align-items-center">
+            <i class="bi bi-play-fill"></i>
+            Jugar
+          </h:commandLink>
+        </div>
+
+        <!-- Mensajes de error o de apuesta hecha (Growl de PrimeFaces) -->
+        <p:growl id="growl" showDetail="true" life="4000" />
+      </h:form>
+    </main>
+  </ui:define>
+
+</ui:composition>

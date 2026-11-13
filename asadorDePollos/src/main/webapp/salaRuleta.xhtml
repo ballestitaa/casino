@@ -1,0 +1,135 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets">
+
+  <ui:define name="title">Sala Ruleta | RoyalSpin</ui:define>
+
+  <ui:define name="content">
+    <!-- ====================================
+     CABECERA DE LA SALA
+===================================== -->
+    <h:form id="navForm">
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+
+          <span class="sala-saldo ms-auto me-3">
+            <i class="bi bi-wallet2"></i>
+            Saldo:
+            <h:outputText id="saldo" value="#{ruletaBean.saldo}" styleClass="ms-1">
+              <f:convertNumber pattern="#,##0 €" locale="es" />
+            </h:outputText>
+          </span>
+
+          <h:commandLink action="#{ruletaBean.salir}"
+                         styleClass="btn btn-outline-warning fw-bold">
+            <i class="bi bi-box-arrow-left"></i>
+            Salir de la sala
+          </h:commandLink>
+        </div>
+      </nav>
+    </h:form>
+
+    <!-- ====================================
+     MESA DE RULETA
+===================================== -->
+    <main class="sala">
+      <h1 class="sala-titulo">#{ruletaBean.nombre}</h1>
+
+      <!-- Un único formulario envuelve la mesa para no cambiar su estructura CSS -->
+      <h:form id="mesaForm">
+        <div class="mesa mesa-ruleta">
+
+          <!-- RUEDA (gira sola con CSS; no se repinta por AJAX) -->
+          <div class="rueda">
+            <div class="rueda-centro"></div>
+            <div class="bola"></div>
+          </div>
+
+          <!-- TAPETE: cada casilla es un enlace que coloca la ficha seleccionada -->
+          <h:panelGroup id="tapete" layout="block" styleClass="tapete">
+
+            <h:commandLink styleClass="numero cero position-relative text-decoration-none"
+                           action="#{ruletaBean.apostar('0')}">
+              <f:ajax render=":mesaForm:tapete :mesaForm:controles :navForm:saldo" />
+              0
+              <h:outputText value="#{ruletaBean.importe('0')}"
+                            rendered="#{ruletaBean.importe('0') gt 0}"
+                            styleClass="badge rounded-pill text-bg-warning position-absolute bottom-0 end-0" />
+            </h:commandLink>
+
+            <ui:repeat value="#{ruletaBean.numeros}" var="n">
+              <h:commandLink styleClass="numero #{ruletaBean.color(n)} position-relative text-decoration-none"
+                             action="#{ruletaBean.apostar(n)}">
+                <f:ajax render=":mesaForm:tapete :mesaForm:controles :navForm:saldo" />
+                #{n}
+                <h:outputText value="#{ruletaBean.importe(n)}"
+                              rendered="#{ruletaBean.importe(n) gt 0}"
+                              styleClass="badge rounded-pill text-bg-warning position-absolute bottom-0 end-0" />
+              </h:commandLink>
+            </ui:repeat>
+
+          </h:panelGroup>
+
+          <!-- CONTROLES: Spin, fichas, Clear y Repeat -->
+          <h:panelGroup id="controles" layout="block"
+                        styleClass="card text-bg-dark border-warning mt-3">
+
+            <div class="card-body d-flex flex-wrap align-items-center justify-content-center gap-3">
+
+              <!-- SPIN (se desactiva si no hay fichas en la mesa) -->
+              <h:commandLink action="#{ruletaBean.girar}"
+                             styleClass="btn btn-success btn-lg fw-bold px-4 #{empty ruletaBean.apuestas ? 'disabled' : ''}">
+                <f:ajax render=":mesaForm:tapete :mesaForm:controles :navForm:saldo" />
+                <i class="bi bi-arrow-repeat"></i> Spin
+              </h:commandLink>
+
+              <!-- FICHAS: 50, 100, 500, 1000 -->
+              <div class="d-flex align-items-center gap-3">
+                <ui:repeat value="#{ruletaBean.fichas}" var="valor">
+                  <h:commandLink action="#{ruletaBean.seleccionarFicha(valor)}"
+                                 styleClass="btn rounded-circle fw-bold ficha-btn border border-4 border-dashed
+                                             #{valor eq 50 ? 'text-bg-secondary' : (valor eq 100 ? 'text-bg-danger' : (valor eq 500 ? 'text-bg-warning' : 'text-bg-primary'))}
+                                             #{ruletaBean.fichaSeleccionada eq valor ? 'border-warning shadow-lg ficha-activa' : 'border-light'}">
+                    <f:ajax render=":mesaForm:controles" />
+                    #{valor}
+                  </h:commandLink>
+                </ui:repeat>
+              </div>
+
+              <!-- CLEAR y REPEAT -->
+              <div class="d-flex flex-column gap-2">
+                <h:commandLink action="#{ruletaBean.limpiar}"
+                               styleClass="btn btn-outline-danger btn-sm fw-bold">
+                  <f:ajax render=":mesaForm:tapete :mesaForm:controles :navForm:saldo" />
+                  <i class="bi bi-trash"></i> Clear
+                </h:commandLink>
+                <h:commandLink action="#{ruletaBean.repetir}"
+                               styleClass="btn btn-outline-warning btn-sm fw-bold">
+                  <f:ajax render=":mesaForm:tapete :mesaForm:controles :navForm:saldo" />
+                  <i class="bi bi-arrow-counterclockwise"></i> Repeat
+                </h:commandLink>
+              </div>
+            </div>
+
+            <!-- RESUMEN Y MENSAJES -->
+            <div class="card-footer d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <span class="badge text-bg-dark border border-warning fs-6">
+                <i class="bi bi-coin"></i>
+                Total apostado: #{ruletaBean.totalApostado} €
+              </span>
+
+              <h:panelGroup rendered="#{not empty ruletaBean.mensaje}"
+                            styleClass="alert py-1 px-3 mb-0 #{ruletaBean.ultimaGanada ? 'alert-success' : 'alert-secondary'}">
+                #{ruletaBean.mensaje}
+              </h:panelGroup>
+            </div>
+
+          </h:panelGroup>
+        </div>
+      </h:form>
+    </main>
+  </ui:define>
+
+</ui:composition>

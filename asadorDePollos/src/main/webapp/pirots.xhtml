@@ -1,0 +1,119 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets">
+
+  <ui:define name="title">Pirots 3 | RoyalSpin</ui:define>
+
+  <ui:define name="content">
+    <!-- ====================================
+     CABECERA santi
+===================================== -->
+
+    <!-- ====================================
+     CONTENIDO
+===================================== -->
+
+    <main class="container-fluid home-container">
+      <div class="row g-4">
+        <!-- =================================
+             COLUMNA IZQUIERDA
+        ================================== -->
+
+        <div class="col col-lg-3">
+          <div class="big-win border-warning">
+            <div class="big-win-title">
+              <i class="bi bi-trophy"></i>
+              Pirots 3 Leaderboard
+            </div>
+
+            <!-- GANADOR 1 -->
+
+            <div class="winner">
+              <div class="winner-position">1</div>
+              <div class="winner-avatar">
+                <img
+                  width="40px"
+                  height="40px"
+                  class="rounded-circle"
+                  src="https://i.pravatar.cc/120?img=14"
+                  alt="Perfil"
+                />
+              </div>
+
+              <div class="winner-name">Diego F.</div>
+              <div class="winner-amount ms-auto">42.000 €</div>
+            </div>
+
+            <!-- GANADOR 2 -->
+
+            <div class="winner">
+              <div class="winner-position">2</div>
+              <div class="winner-avatar">
+                <img
+                  width="40px"
+                  height="40px"
+                  class="rounded-circle"
+                  src="https://i.pravatar.cc/250?img=20"
+                  alt="Perfil"
+                />
+              </div>
+
+              <div class="winner-name">Sofía P.</div>
+              <div class="winner-amount ms-auto">27.600 €</div>
+            </div>
+
+            <!-- GANADOR 3 -->
+
+            <div class="winner">
+              <div class="winner-position">3</div>
+              <div class="winner-avatar">
+                <img
+                  width="40px"
+                  height="40px"
+                  class="rounded-circle"
+                  src="https://i.pravatar.cc/300?img=33"
+                  alt="Perfil"
+                />
+              </div>
+              <div class="winner-name">Raúl D.</div>
+              <div class="winner-amount ms-auto">13.900 €</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================
+             COLUMNA DERECHA
+        ================================== -->
+
+        <div class="col col-lg-9">
+          <div class="featured-game border-warning">
+            <!-- ZONA DEL JUEGO -->
+            <div class="game-area game-pirots">PIROTS 3</div>
+
+            <!-- INFORMACIÓN -->
+
+            <div class="game-info">
+              <h1>Pirots 3</h1>
+
+              <p>
+                ¡Tragaperras del viejo oeste con premios increíbles! Gira ahora
+              </p>
+
+              <h:form>
+                <h:commandLink action="#{spinBean.entrar}"
+                               styleClass="btn btn-warning btn-lg fw-bold w-25">
+                  <i class="bi bi-play-fill"></i>
+                  Jugar
+                </h:commandLink>
+              </h:form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- B ootstrap JS -->
+  </ui:define>
+
+</ui:composition>

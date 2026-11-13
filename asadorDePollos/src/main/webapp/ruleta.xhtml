@@ -1,0 +1,120 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets">
+
+  <ui:define name="title">Ruleta | RoyalSpin</ui:define>
+
+  <ui:define name="content">
+    <!-- ====================================
+     CABECERA santi
+===================================== -->
+
+    <!-- ====================================
+     CONTENIDO
+===================================== -->
+
+    <main class="container-fluid home-container">
+      <div class="row g-4">
+        <!-- =================================
+             COLUMNA IZQUIERDA
+        ================================== -->
+
+        <div class="col col-lg-3">
+          <div class="big-win border-warning">
+            <div class="big-win-title">
+              <i class="bi bi-trophy"></i>
+              Ruleta Leaderboard
+            </div>
+
+            <!-- GANADOR 1 -->
+
+            <div class="winner">
+              <div class="winner-position">1</div>
+              <div class="winner-avatar">
+                <img
+                  width="40px"
+                  height="40px"
+                  class="rounded-circle"
+                  src="https://i.pravatar.cc/120?img=5"
+                  alt="Perfil"
+                />
+              </div>
+
+              <div class="winner-name">Laura G.</div>
+              <div class="winner-amount ms-auto">24.300 €</div>
+            </div>
+
+            <!-- GANADOR 2 -->
+
+            <div class="winner">
+              <div class="winner-position">2</div>
+              <div class="winner-avatar">
+                <img
+                  width="40px"
+                  height="40px"
+                  class="rounded-circle"
+                  src="https://i.pravatar.cc/250?img=8"
+                  alt="Perfil"
+                />
+              </div>
+
+              <div class="winner-name">Javier R.</div>
+              <div class="winner-amount ms-auto">15.750 €</div>
+            </div>
+
+            <!-- GANADOR 3 -->
+
+            <div class="winner">
+              <div class="winner-position">3</div>
+              <div class="winner-avatar">
+                <img
+                  width="40px"
+                  height="40px"
+                  class="rounded-circle"
+                  src="https://i.pravatar.cc/300?img=16"
+                  alt="Perfil"
+                />
+              </div>
+              <div class="winner-name">Elena V.</div>
+              <div class="winner-amount ms-auto">8.200 €</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================
+             COLUMNA DERECHA
+        ================================== -->
+
+        <div class="col col-lg-9">
+          <div class="featured-game border-warning">
+            <!-- ZONA DEL JUEGO -->
+            <div class="game-area game-ruleta">RULETA!</div>
+
+            <!-- INFORMACIÓN -->
+
+            <div class="game-info">
+              <h1>Ruleta en Vivo</h1>
+
+              <p>
+                ¡Haz girar la ruleta con crupier en vivo y apuesta a tu número
+                de la suerte!
+              </p>
+
+              <h:form>
+                <h:commandLink action="#{ruletaBean.entrar}"
+                               styleClass="btn btn-warning btn-lg fw-bold w-25">
+                  <i class="bi bi-play-fill"></i>
+                  Jugar
+                </h:commandLink>
+              </h:form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- B ootstrap JS -->
+  </ui:define>
+
+</ui:composition>
